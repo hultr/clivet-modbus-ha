@@ -1,0 +1,161 @@
+# Control registers (0–12) — writable setpoints and mode commands
+# scan_interval: 60 seconds (user-initiated changes, no need for fast polling)
+
+- name: clivet_onoff_register
+  address: 0
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_onoff_register
+  scan_interval: 60
+  # Register 0 — ON/OFF bitmask: Bit0=TS room, Bit1=T1S zone1, Bit2=T5S DHW, Bit3=T2S zone2, Bit4–15 reserved
+  # Raw bitmask — see templates/06_switches_reg0.yaml for individual bit switches
+
+- name: clivet_mode_setting
+  address: 1
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_mode_setting
+  scan_interval: 60
+  # Register 1 — Operating mode command: 1=Auto, 2=Cooling, 3=Heating
+  # See templates/08_combined_sensors.yaml for decoded mode name sensor
+
+- name: clivet_t1s_packed
+  address: 2
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_t1s_packed
+  scan_interval: 60
+  # Register 2 — T1s packed: low byte=Zone1 flow setpoint °C, high byte=Zone2 flow setpoint °C
+
+- name: clivet_room_temp_setpoint
+  address: 3
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 0.5
+  precision: 1
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_room_temp_setpoint
+  scan_interval: 60
+  # Register 3 — Room temperature setpoint Ts 17–30°C; raw = actual × 2, scale = 0.5
+
+- name: clivet_dhw_setpoint
+  address: 4
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_dhw_setpoint
+  scan_interval: 60
+  # Register 4 — T5s DHW tank setpoint 20–60°C (75°C when AHS is used)
+
+- name: clivet_function_register
+  address: 5
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_function_register
+  scan_interval: 60
+  # Register 5 — Function bitmask: Bit4=Sterilization, Bit5=Holiday away (RO), Bit6=Silent,
+  # Bit7=Silent level2, Bit8=Holiday home (RO), Bit9=Reserved, Bit10=ECO, Bit11=DHW return pump,
+  # Bit12=Zone1 curve, Bit13=Zone2 curve
+  # Raw bitmask — see templates/07_switches_reg5.yaml for individual bit switches
+
+- name: clivet_curve_selection
+  address: 6
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_curve_selection
+  scan_interval: 60
+  # Register 6 — Curve selection: low byte=Zone1 curve 1–9, high byte=Zone2 curve 1–9
+
+- name: clivet_forced_hot_water
+  address: 7
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_forced_hot_water
+  scan_interval: 60
+  # Register 7 — Forced hot water: 0=disable, 1=Force ON, 2=Force OFF (TBH=tank backup heater)
+
+- name: clivet_force_tbh
+  address: 8
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_force_tbh
+  scan_interval: 60
+  # Register 8 — Force TBH (tank backup heater): 0=disable, 1=Force ON, 2=Force OFF
+  # Cannot be ON simultaneously with register 9 (IBH) forced ON
+
+- name: clivet_force_ibh
+  address: 9
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_force_ibh
+  scan_interval: 60
+  # Register 9 — Force IBH (inline backup heater): 0=disable, 1=Force ON, 2=Force OFF
+  # Cannot be ON simultaneously with register 8 (TBH) forced ON
+
+- name: clivet_timer
+  address: 10
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "h"
+  unique_id: clivet_timer
+  scan_interval: 60
+  # Register 10 — Timer 0–24h (likely DHW schedule or activation delay)
+
+- name: clivet_zone1_flow_setpoint
+  address: 11
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_zone1_flow_setpoint
+  scan_interval: 60
+  # Register 11 — T1s Zone 1 flow temperature setpoint (dedicated; may mirror low byte of register 2)
+
+- name: clivet_zone2_flow_setpoint
+  address: 12
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_zone2_flow_setpoint
+  scan_interval: 60
+  # Register 12 — T1s Zone 2 flow temperature setpoint (dedicated; may mirror high byte of register 2)

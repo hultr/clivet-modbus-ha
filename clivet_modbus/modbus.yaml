@@ -1,0 +1,20 @@
+# Clivet Sphera EVO 2.0 Heat Pump — Modbus Configuration
+#
+# USAGE in configuration.yaml:
+#   modbus: !include clivet_modbus/modbus.yaml
+#   template: !include_dir_merge_list clivet_modbus/templates/
+#
+# The host IP is read from secrets.yaml:
+#   clivet_host: 192.168.20.113   # <-- default IP, adjust to your installation
+#
+# To exclude technician registers (200–272), remove or rename:
+#   clivet_modbus/sensors/08_tech.yaml
+
+- name: clivet_hp
+  type: tcp
+  host: !secret clivet_host  # default: 192.168.20.113
+  port: 502
+  delay: 0
+  message_wait_milliseconds: 30
+  timeout: 5
+  sensors: !include_dir_merge_list sensors/

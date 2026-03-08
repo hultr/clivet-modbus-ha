@@ -1,0 +1,155 @@
+# Template switches for register 5 — function bitmask (writable bits only)
+# Uses read-modify-write pattern to set/clear individual bits.
+# Source sensor: sensor.clivet_function_register
+#
+# NOTE: Bit5 (Holiday Away) and Bit8 (Holiday Home) are READ ONLY — no switches created.
+#
+# Writable bits:
+#   BIT4  = Sterilization enable        (mask=16,   clear=65519)
+#   BIT6  = Silent mode                 (mask=64,   clear=65471)
+#   BIT7  = Silent mode level 2         (mask=128,  clear=65407)
+#   BIT10 = ECO mode                    (mask=1024, clear=64511)
+#   BIT11 = DHW return pump enable      (mask=2048, clear=63487)
+#   BIT12 = Zone 1 weather curve enable (mask=4096, clear=61439)
+#   BIT13 = Zone 2 weather curve enable (mask=8192, clear=57343)
+
+- switch:
+    - name: "Clivet Sterilization Enable"
+      unique_id: clivet_switch_func_sterilization
+      # Register 5, BIT4 — DHW sterilization (Legionella protection) cycle enable
+      state: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_and(16) != 0 }}"
+      turn_on:
+        action: modbus.write_register
+        data:
+          hub: clivet_hp
+          unit: 1
+          address: 5
+          value: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_or(16) }}"
+      turn_off:
+        action: modbus.write_register
+        data:
+          hub: clivet_hp
+          unit: 1
+          address: 5
+          value: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_and(65519) }}"
+          # clear_mask = 65535 ^ (1 << 4) = 65519
+
+    - name: "Clivet Silent Mode"
+      unique_id: clivet_switch_func_silent
+      # Register 5, BIT6 — Silent operation mode (reduced noise, lower fan/compressor speed)
+      state: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_and(64) != 0 }}"
+      turn_on:
+        action: modbus.write_register
+        data:
+          hub: clivet_hp
+          unit: 1
+          address: 5
+          value: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_or(64) }}"
+      turn_off:
+        action: modbus.write_register
+        data:
+          hub: clivet_hp
+          unit: 1
+          address: 5
+          value: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_and(65471) }}"
+          # clear_mask = 65535 ^ (1 << 6) = 65471
+
+    - name: "Clivet Silent Mode Level 2"
+      unique_id: clivet_switch_func_silent_level2
+      # Register 5, BIT7 — Silent mode level 2 (further noise reduction)
+      state: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_and(128) != 0 }}"
+      turn_on:
+        action: modbus.write_register
+        data:
+          hub: clivet_hp
+          unit: 1
+          address: 5
+          value: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_or(128) }}"
+      turn_off:
+        action: modbus.write_register
+        data:
+          hub: clivet_hp
+          unit: 1
+          address: 5
+          value: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_and(65407) }}"
+          # clear_mask = 65535 ^ (1 << 7) = 65407
+
+    - name: "Clivet ECO Mode"
+      unique_id: clivet_switch_func_eco
+      # Register 5, BIT10 — ECO energy-saving mode
+      state: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_and(1024) != 0 }}"
+      turn_on:
+        action: modbus.write_register
+        data:
+          hub: clivet_hp
+          unit: 1
+          address: 5
+          value: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_or(1024) }}"
+      turn_off:
+        action: modbus.write_register
+        data:
+          hub: clivet_hp
+          unit: 1
+          address: 5
+          value: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_and(64511) }}"
+          # clear_mask = 65535 ^ (1 << 10) = 64511
+
+    - name: "Clivet DHW Return Pump Enable"
+      unique_id: clivet_switch_func_dhw_pump_return
+      # Register 5, BIT11 — DHW hot water return pump enable
+      state: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_and(2048) != 0 }}"
+      turn_on:
+        action: modbus.write_register
+        data:
+          hub: clivet_hp
+          unit: 1
+          address: 5
+          value: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_or(2048) }}"
+      turn_off:
+        action: modbus.write_register
+        data:
+          hub: clivet_hp
+          unit: 1
+          address: 5
+          value: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_and(63487) }}"
+          # clear_mask = 65535 ^ (1 << 11) = 63487
+
+    - name: "Clivet Zone 1 Weather Curve Enable"
+      unique_id: clivet_switch_func_zone1_curve
+      # Register 5, BIT12 — Zone 1 weather-compensated heating curve enable
+      state: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_and(4096) != 0 }}"
+      turn_on:
+        action: modbus.write_register
+        data:
+          hub: clivet_hp
+          unit: 1
+          address: 5
+          value: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_or(4096) }}"
+      turn_off:
+        action: modbus.write_register
+        data:
+          hub: clivet_hp
+          unit: 1
+          address: 5
+          value: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_and(61439) }}"
+          # clear_mask = 65535 ^ (1 << 12) = 61439
+
+    - name: "Clivet Zone 2 Weather Curve Enable"
+      unique_id: clivet_switch_func_zone2_curve
+      # Register 5, BIT13 — Zone 2 weather-compensated heating curve enable (2-zone kit only)
+      state: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_and(8192) != 0 }}"
+      turn_on:
+        action: modbus.write_register
+        data:
+          hub: clivet_hp
+          unit: 1
+          address: 5
+          value: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_or(8192) }}"
+      turn_off:
+        action: modbus.write_register
+        data:
+          hub: clivet_hp
+          unit: 1
+          address: 5
+          value: "{{ (states('sensor.clivet_function_register') | int(0)) | bitwise_and(57343) }}"
+          # clear_mask = 65535 ^ (1 << 13) = 57343

@@ -1,0 +1,76 @@
+# Combined / derived template sensors
+# These sensors combine multiple raw Modbus registers or decode enumerated values.
+
+- sensor:
+    - name: "Clivet Total Electrical Consumption"
+      unique_id: clivet_tpl_total_electrical_consumption
+      # Registers 143 (high) + 144 (low) — 32-bit electrical energy counter
+      # Unit depends on the unit's firmware; typically kWh. Verify against physical display.
+      state: >-
+        {{ (states('sensor.clivet_electrical_high_bits') | int(0)) * 65536
+           + (states('sensor.clivet_electrical_low_bits') | int(0)) }}
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+
+    - name: "Clivet Total Heat Energy Produced"
+      unique_id: clivet_tpl_total_heat_energy
+      # Registers 145 (high) + 146 (low) — 32-bit heat energy counter
+      # Unit depends on the unit's firmware; typically kWh. Verify against physical display.
+      state: >-
+        {{ (states('sensor.clivet_heat_energy_high_bits') | int(0)) * 65536
+           + (states('sensor.clivet_heat_energy_low_bits') | int(0)) }}
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+
+    - name: "Clivet ODU Operating Mode Name"
+      unique_id: clivet_tpl_odu_mode_name
+      # Register 101 — ODU mode decoded to a human-readable string
+      # 0=OFF, 2=COOL, 3=HEAT (note: value 1 is not used; Swedish manual has a printing error)
+      state: >-
+        {% set mode = states('sensor.clivet_operating_mode') | int(-1) %}
+        {% if mode == 0 %}OFF
+        {% elif mode == 2 %}COOL
+        {% elif mode == 3 %}HEAT
+        {% else %}Unknown ({{ mode }})
+        {% endif %}
+
+    - name: "Clivet Mode Command Name"
+      unique_id: clivet_tpl_mode_command_name
+      # Register 1 — Mode setpoint decoded to a human-readable string
+      # 1=Auto, 2=Cooling, 3=Heating
+      state: >-
+        {% set mode = states('sensor.clivet_mode_setting') | int(-1) %}
+        {% if mode == 1 %}Auto
+        {% elif mode == 2 %}Cooling
+        {% elif mode == 3 %}Heating
+        {% else %}Unknown ({{ mode }})
+        {% endif %}
+
+    - name: "Clivet IDU Capacity Combined"
+      unique_id: clivet_tpl_idu_capacity_combined
+      # Registers 1023 (high) + 1024 (low) — 32-bit IDU capacity value divided by 100 for kW
+      state: >-
+        {{ ((states('sensor.clivet_idu_capacity_high_bits') | int(0)) * 65536
+            + (states('sensor.clivet_idu_capacity_low_bits') | int(0))) / 100 | round(2) }}
+      unit_of_measurement: "kW"
+      device_class: power
+
+    - name: "Clivet Calculated COP"
+      unique_id: clivet_tpl_calculated_cop
+      # Derived: heat energy / electrical energy — instantaneous approximation
+      # Uses IDU capacity (reg 140) and ODU current × voltage as a rough proxy.
+      # For accurate COP, use the energy counters over a time period instead.
+      # This is only meaningful when the compressor is running (frequency > 0).
+      state: >-
+        {% set heat = states('sensor.clivet_idu_capacity') | float(0) %}
+        {% set elec = (states('sensor.clivet_odu_current') | float(0))
+                      * (states('sensor.clivet_odu_voltage') | float(0)) / 1000 %}
+        {% if elec > 0.1 %}
+          {{ (heat / elec) | round(2) }}
+        {% else %}
+          unavailable
+        {% endif %}
+      unit_of_measurement: ""
+      icon: "mdi:heat-pump"

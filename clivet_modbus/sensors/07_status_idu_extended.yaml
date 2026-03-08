@@ -1,0 +1,405 @@
+# IDU extended status registers (1011–1042) — indoor unit detailed telemetry
+# scan_interval: 30 seconds
+# Note: register 1010 (IDU load output, all bits reserved) is intentionally skipped.
+# Note: 0x7F (127) in temperature registers indicates a sensor error.
+
+- name: clivet_t1_primary_outlet
+  address: 1011
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_t1_primary_outlet
+  scan_interval: 30
+  # Register 1011 — T1 primary water outlet temperature °C (0x7F = sensor error)
+
+- name: clivet_t1b_after_aux_heater
+  address: 1012
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_t1b_after_aux_heater
+  scan_interval: 30
+  # Register 1012 — T1B temperature after auxiliary heater °C (0x7F = sensor error)
+
+- name: clivet_t2_liquid_refrigerant_idu
+  address: 1013
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_t2_liquid_refrigerant_idu
+  scan_interval: 30
+  # Register 1013 — T2 liquid refrigerant temperature °C from IDU (0x7F = sensor error)
+
+- name: clivet_t2b_liquid_gas_refrigerant
+  address: 1014
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_t2b_liquid_gas_refrigerant
+  scan_interval: 30
+  # Register 1014 — T2B liquid/gas refrigerant temperature °C (0x7F = sensor error)
+
+- name: clivet_t5_dhw_idu
+  address: 1015
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_t5_dhw_idu
+  scan_interval: 30
+  # Register 1015 — T5 DHW tank temperature °C from IDU telemetry (0x7F = sensor error)
+
+- name: clivet_ta_indoor_air_idu
+  address: 1016
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_ta_indoor_air_idu
+  scan_interval: 30
+  # Register 1016 — Ta indoor air temperature °C from IDU telemetry (0x7F = sensor error)
+
+- name: clivet_tbt1_buffer_tank_idu
+  address: 1017
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_tbt1_buffer_tank_idu
+  scan_interval: 30
+  # Register 1017 — Tbt1 buffer tank temperature °C from IDU telemetry (0x7F = sensor error)
+
+- name: clivet_tbt2_secondary_tank_idu
+  address: 1018
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_tbt2_secondary_tank_idu
+  scan_interval: 30
+  # Register 1018 — Tbt2 secondary buffer tank temperature °C from IDU telemetry (0x7F = sensor error)
+
+- name: clivet_water_flow_idu
+  address: 1019
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 0.01
+  precision: 2
+  unit_of_measurement: "m³/h"
+  unique_id: clivet_water_flow_idu
+  scan_interval: 30
+  # Register 1019 — Water flow rate m³/h from IDU; raw = actual × 100, scale = 0.01
+
+- name: clivet_unit_capacity_kw
+  address: 1020
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "kW"
+  device_class: power
+  unique_id: clivet_unit_capacity_kw
+  scan_interval: 30
+  # Register 1020 — Unit type/nominal capacity kW (value equals the kW rating of the unit)
+
+- name: clivet_target_frequency_idu
+  address: 1021
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "Hz"
+  device_class: frequency
+  unique_id: clivet_target_frequency_idu
+  scan_interval: 30
+  # Register 1021 — Target compressor frequency Hz as seen from IDU side
+
+- name: clivet_idu_software_version_2
+  address: 1022
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_idu_software_version_2
+  scan_interval: 30
+  # Register 1022 — IDU software version 1–99 (from IDU telemetry path)
+
+- name: clivet_idu_capacity_high_bits
+  address: 1023
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_idu_capacity_high_bits
+  scan_interval: 30
+  # Register 1023 — High 16 bits of IDU capacity counter
+  # See templates/08_combined_sensors.yaml for 32-bit combined value in kW
+
+- name: clivet_idu_capacity_low_bits
+  address: 1024
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_idu_capacity_low_bits
+  scan_interval: 30
+  # Register 1024 — Low 16 bits of IDU capacity counter
+  # See templates/08_combined_sensors.yaml for 32-bit combined value in kW
+
+- name: clivet_idu_capacity_scaled
+  address: 1025
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 0.01
+  precision: 2
+  unit_of_measurement: "kW"
+  device_class: power
+  unique_id: clivet_idu_capacity_scaled
+  scan_interval: 30
+  # Register 1025 — IDU operating capacity kW; raw = actual × 100, scale = 0.01
+
+- name: clivet_fan_rpm_idu
+  address: 1026
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "rpm"
+  unique_id: clivet_fan_rpm_idu
+  scan_interval: 30
+  # Register 1026 — Fan speed rpm from IDU telemetry
+
+- name: clivet_pmv_opening_idu
+  address: 1027
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "pulses"
+  unique_id: clivet_pmv_opening_idu
+  scan_interval: 30
+  # Register 1027 — PMV/EXV expansion valve opening pulses from IDU (steps of 8)
+
+- name: clivet_t3_coil_idu
+  address: 1028
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_t3_coil_idu
+  scan_interval: 30
+  # Register 1028 — T3 coil temperature °C from IDU telemetry
+
+- name: clivet_t4_ambient_idu
+  address: 1029
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_t4_ambient_idu
+  scan_interval: 30
+  # Register 1029 — T4 outdoor ambient temperature °C from IDU telemetry
+
+- name: clivet_tp_discharge_idu
+  address: 1030
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_tp_discharge_idu
+  scan_interval: 30
+  # Register 1030 — Tp discharge/exhaust gas temperature °C from IDU telemetry
+
+- name: clivet_th_suction_idu
+  address: 1031
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_th_suction_idu
+  scan_interval: 30
+  # Register 1031 — Th suction gas temperature °C from IDU telemetry
+
+- name: clivet_tf_from_odu
+  address: 1032
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_tf_from_odu
+  scan_interval: 30
+  # Register 1032 — TF module temperature received from ODU °C (0x7F = invalid/not available)
+
+- name: clivet_high_pressure_idu
+  address: 1033
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "kPa"
+  device_class: pressure
+  unique_id: clivet_high_pressure_idu
+  scan_interval: 30
+  # Register 1033 — Refrigerant high-side pressure kPa from IDU telemetry
+
+- name: clivet_low_pressure_idu
+  address: 1034
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "kPa"
+  device_class: pressure
+  unique_id: clivet_low_pressure_idu
+  scan_interval: 30
+  # Register 1034 — Refrigerant low-side pressure kPa from IDU telemetry
+
+- name: clivet_dc_bus_current_idu
+  address: 1035
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "A"
+  device_class: current
+  unique_id: clivet_dc_bus_current_idu
+  scan_interval: 30
+  # Register 1035 — DC bus current A from IDU telemetry
+
+- name: clivet_dc_bus_voltage_idu
+  address: 1036
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "V"
+  device_class: voltage
+  unique_id: clivet_dc_bus_voltage_idu
+  scan_interval: 30
+  # Register 1036 — DC bus voltage V from IDU telemetry
+
+- name: clivet_odu_current_idu
+  address: 1037
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "A"
+  device_class: current
+  unique_id: clivet_odu_current_idu
+  scan_interval: 30
+  # Register 1037 — ODU supply current A as seen from IDU telemetry
+
+- name: clivet_odu_voltage_idu
+  address: 1038
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "V"
+  device_class: voltage
+  unique_id: clivet_odu_voltage_idu
+  scan_interval: 30
+  # Register 1038 — ODU supply voltage V as seen from IDU telemetry
+
+- name: clivet_odu_frequency_limit_solution
+  address: 1039
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_odu_frequency_limit_solution
+  scan_interval: 30
+  # Register 1039 — ODU frequency limitation solution/scheme identifier
+
+- name: clivet_idu_electrical_high_bits
+  address: 1040
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_idu_electrical_high_bits
+  scan_interval: 30
+  # Register 1040 — High 16 bits of IDU electrical energy counter
+
+- name: clivet_idu_electrical_low_bits
+  address: 1041
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_idu_electrical_low_bits
+  scan_interval: 30
+  # Register 1041 — Low 16 bits of IDU electrical energy counter
+
+- name: clivet_odu_software_version
+  address: 1042
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_odu_software_version
+  scan_interval: 30
+  # Register 1042 — ODU software version as reported through IDU telemetry

@@ -1,0 +1,90 @@
+# Binary sensors extracted from register 128 — ODU status bitmask 1
+# Source sensor: sensor.clivet_status_bits_1
+
+- binary_sensor:
+    - name: "Clivet Recirculation Pump Running"
+      unique_id: clivet_bit_reg128_recirculation_pump
+      # Register 128, BIT0 — Water circulation recirculation pump is running
+      state: "{{ (states('sensor.clivet_status_bits_1') | int(0)) | bitwise_and(1) != 0 }}"
+      device_class: running
+
+    - name: "Clivet Defrost Active"
+      unique_id: clivet_bit_reg128_defrost
+      # Register 128, BIT1 — ODU is performing a defrost cycle
+      state: "{{ (states('sensor.clivet_status_bits_1') | int(0)) | bitwise_and(2) != 0 }}"
+      device_class: running
+
+    - name: "Clivet Anti-Freeze Active"
+      unique_id: clivet_bit_reg128_anti_freeze
+      # Register 128, BIT2 — Anti-freeze protection is active
+      state: "{{ (states('sensor.clivet_status_bits_1') | int(0)) | bitwise_and(4) != 0 }}"
+      device_class: safety
+
+    - name: "Clivet Oil Return Active"
+      unique_id: clivet_bit_reg128_oil_return
+      # Register 128, BIT3 — Compressor oil return cycle is active
+      state: "{{ (states('sensor.clivet_status_bits_1') | int(0)) | bitwise_and(8) != 0 }}"
+      device_class: running
+
+    - name: "Clivet Remote ON/OFF Signal"
+      unique_id: clivet_bit_reg128_remote_onoff
+      # Register 128, BIT4 — Remote ON/OFF input signal is active
+      state: "{{ (states('sensor.clivet_status_bits_1') | int(0)) | bitwise_and(16) != 0 }}"
+
+    - name: "Clivet ODU Test Mode"
+      unique_id: clivet_bit_reg128_odu_test_mode
+      # Register 128, BIT5 — ODU is in test/commissioning mode
+      state: "{{ (states('sensor.clivet_status_bits_1') | int(0)) | bitwise_and(32) != 0 }}"
+
+    - name: "Clivet Room Thermostat Heat Demand"
+      unique_id: clivet_bit_reg128_room_thermostat_heat
+      # Register 128, BIT6 — Room thermostat is requesting heating
+      state: "{{ (states('sensor.clivet_status_bits_1') | int(0)) | bitwise_and(64) != 0 }}"
+      device_class: heat
+
+    - name: "Clivet Room Thermostat Cool Demand"
+      unique_id: clivet_bit_reg128_room_thermostat_cool
+      # Register 128, BIT7 — Room thermostat is requesting cooling
+      state: "{{ (states('sensor.clivet_status_bits_1') | int(0)) | bitwise_and(128) != 0 }}"
+      device_class: cold
+
+    - name: "Clivet Solar Input Active"
+      unique_id: clivet_bit_reg128_solar_input
+      # Register 128, BIT8 — Solar thermal input signal is active (solar kit only)
+      state: "{{ (states('sensor.clivet_status_bits_1') | int(0)) | bitwise_and(256) != 0 }}"
+
+    - name: "Clivet Water Tank Anti-Freeze Active"
+      unique_id: clivet_bit_reg128_tank_anti_freeze
+      # Register 128, BIT9 — Water/DHW tank anti-freeze protection is active
+      state: "{{ (states('sensor.clivet_status_bits_1') | int(0)) | bitwise_and(512) != 0 }}"
+      device_class: safety
+
+    - name: "Clivet Smart Grid Signal Active"
+      unique_id: clivet_bit_reg128_sg_signal
+      # Register 128, BIT10 — Smart grid (SG Ready) input signal is active
+      state: "{{ (states('sensor.clivet_status_bits_1') | int(0)) | bitwise_and(1024) != 0 }}"
+
+    - name: "Clivet EVU Signal Active"
+      unique_id: clivet_bit_reg128_evu_signal
+      # Register 128, BIT11 — EVU (utility load shedding) signal is active
+      state: "{{ (states('sensor.clivet_status_bits_1') | int(0)) | bitwise_and(2048) != 0 }}"
+
+    - name: "Clivet Status Bit 12 Reserved"
+      unique_id: clivet_bit_reg128_bit12_reserved
+      # Register 128, BIT12 — Reserved (no documented function)
+      state: "{{ (states('sensor.clivet_status_bits_1') | int(0)) | bitwise_and(4096) != 0 }}"
+
+    - name: "Clivet Upload Serial Number"
+      unique_id: clivet_bit_reg128_upload_sn
+      # Register 128, BIT13 — Unit is uploading serial number data
+      state: "{{ (states('sensor.clivet_status_bits_1') | int(0)) | bitwise_and(8192) != 0 }}"
+
+    - name: "Clivet Upload Software Version"
+      unique_id: clivet_bit_reg128_upload_sw_version
+      # Register 128, BIT14 — Unit is uploading software version data
+      state: "{{ (states('sensor.clivet_status_bits_1') | int(0)) | bitwise_and(16384) != 0 }}"
+
+    - name: "Clivet Installation Parameter Active"
+      unique_id: clivet_bit_reg128_installation_param
+      # Register 128, BIT15 — Installation parameter mode is active
+      state: "{{ (states('sensor.clivet_status_bits_1') | int(0)) | bitwise_and(32768) != 0 }}"

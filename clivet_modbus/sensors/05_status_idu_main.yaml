@@ -1,0 +1,87 @@
+# IDU main status registers (1000–1006) — indoor unit live readings
+# scan_interval: 30 seconds
+
+- name: clivet_idu_operation_mode
+  address: 1000
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_idu_operation_mode
+  scan_interval: 30
+  # Register 1000 — IDU operating mode: 0=OFF, 2=COOL, 3=HEAT
+
+- name: clivet_com_rps_compressor
+  address: 1001
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "Hz"
+  device_class: frequency
+  unique_id: clivet_com_rps_compressor
+  scan_interval: 30
+  # Register 1001 — Com. rps compressor speed reported from IDU telemetry Hz
+
+- name: clivet_twi_water_inlet
+  address: 1002
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_twi_water_inlet
+  scan_interval: 30
+  # Register 1002 — Twi water inlet temperature °C (IDU side)
+
+- name: clivet_two_water_outlet
+  address: 1003
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_two_water_outlet
+  scan_interval: 30
+  # Register 1003 — Two water outlet temperature °C (IDU side)
+
+- name: clivet_tsolar_idu
+  address: 1004
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_tsolar_idu
+  scan_interval: 30
+  # Register 1004 — Tsolar solar panel temperature °C as seen by IDU (solar kit only)
+
+- name: clivet_slave_unit_error_code
+  address: 1005
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_slave_unit_error_code
+  scan_interval: 30
+  # Register 1005 — Slave unit error code (cascade / multi-unit installations)
+
+- name: clivet_p6_error
+  address: 1006
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_p6_error
+  scan_interval: 30
+  # Register 1006 — P6 error code (reserved; may always read 0)

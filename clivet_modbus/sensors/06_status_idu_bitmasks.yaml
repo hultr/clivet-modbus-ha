@@ -1,0 +1,42 @@
+# IDU status bitmask registers (1007–1009) — raw values for template bit extraction
+# scan_interval: 30 seconds
+# Raw bitmask — see templates/03_bits_reg1007.yaml, templates/04_bits_reg1008.yaml,
+# and templates/05_bits_reg1009.yaml for individual binary sensors.
+
+- name: clivet_idu_status_1
+  address: 1007
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_idu_status_1
+  scan_interval: 30
+  # Register 1007 — IDU status bitmask 1
+  # BIT0=Defrost, BIT1=Anti-freeze, BIT2=Oil return, BIT3–7=Reserved
+
+- name: clivet_idu_status_2
+  address: 1008
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_idu_status_2
+  scan_interval: 30
+  # Register 1008 — IDU status bitmask 2
+  # BIT0=Cool active, BIT1=Heat active, BIT2=DHW active, BIT3=IBH installed,
+  # BIT4=T1 sensor installed, BIT5–7=Reserved
+
+- name: clivet_idu_load_bits
+  address: 1009
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_idu_load_bits
+  scan_interval: 30
+  # Register 1009 — IDU load output bitmask
+  # BIT0=IBH1 running, BIT1=IBH2 running, BIT2=Reserved, BIT3=water pump PUMP_i,
+  # BIT4=RUN command, BIT5=DEFROST, BIT6=Reserved, BIT7=crankcase heater HEAT4

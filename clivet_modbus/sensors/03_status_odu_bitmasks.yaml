@@ -1,0 +1,34 @@
+# ODU status bitmask registers (128–129) — raw values for template bit extraction
+# scan_interval: 30 seconds
+# Raw bitmask — see templates/01_bits_reg128.yaml and templates/02_bits_reg129.yaml
+# for individual binary sensors derived from these registers.
+
+- name: clivet_status_bits_1
+  address: 128
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_status_bits_1
+  scan_interval: 30
+  # Register 128 — ODU status bitmask 1
+  # BIT0=recirculation pump, BIT1=defrost, BIT2=anti-freeze, BIT3=oil return,
+  # BIT4=remote ON/OFF, BIT5=ODU test mode, BIT6=room thermostat heat, BIT7=room thermostat cool,
+  # BIT8=solar input, BIT9=water tank anti-freezing, BIT10=SG signal, BIT11=EVU signal,
+  # BIT12=reserved, BIT13=upload SN, BIT14=upload software version, BIT15=installation parameter
+
+- name: clivet_load_output_bits
+  address: 129
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_load_output_bits
+  scan_interval: 30
+  # Register 129 — ODU load output bitmask
+  # BIT0=IBH, BIT1=IBH2, BIT2=TBH, BIT3=water pump PUMP_I, BIT4=SV1, BIT5=SV2,
+  # BIT6=external pump P_o, BIT7=DHW recirc pump P_D, BIT8=mix pump P_C, BIT9=SV3,
+  # BIT10=HEAT4, BIT11=solar pump Pump_S, BIT12=ALARM, BIT13=compressor ON,
+  # BIT14=external heat source, BIT15=DEFROST

@@ -1,0 +1,354 @@
+# ODU main status registers (100–127) — outdoor unit live readings
+# scan_interval: 30 seconds
+
+- name: clivet_operating_frequency
+  address: 100
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "Hz"
+  device_class: frequency
+  unique_id: clivet_operating_frequency
+  scan_interval: 30
+  # Register 100 — Compressor operating frequency Hz; 0 = compressor off
+
+- name: clivet_operating_mode
+  address: 101
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_operating_mode
+  scan_interval: 30
+  # Register 101 — ODU operating mode: 0=OFF, 2=COOL, 3=HEAT
+  # Note: Swedish manual has a printing error for this register
+  # See templates/08_combined_sensors.yaml for decoded mode name sensor
+
+- name: clivet_fan_speed
+  address: 102
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "rpm"
+  unique_id: clivet_fan_speed
+  scan_interval: 30
+  # Register 102 — ODU fan speed rpm
+
+- name: clivet_pmv_opening
+  address: 103
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "pulses"
+  unique_id: clivet_pmv_opening
+  scan_interval: 30
+  # Register 103 — PMV/EXV electronic expansion valve opening in pulses (steps of 8 only)
+
+- name: clivet_tw_in
+  address: 104
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_tw_in
+  scan_interval: 30
+  # Register 104 — TW_in water inlet temperature °C (return from the hydronic system)
+
+- name: clivet_tw_out
+  address: 105
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_tw_out
+  scan_interval: 30
+  # Register 105 — TW_out water outlet temperature °C (supply to the hydronic system)
+
+- name: clivet_t3_condenser
+  address: 106
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_t3_condenser
+  scan_interval: 30
+  # Register 106 — T3 condenser/coil temperature °C (NOT outdoor ambient on this unit)
+
+- name: clivet_t4_outdoor_ambient
+  address: 107
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_t4_outdoor_ambient
+  scan_interval: 30
+  # Register 107 — T4 outdoor ambient air temperature °C
+
+- name: clivet_tp_discharge_gas
+  address: 108
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_tp_discharge_gas
+  scan_interval: 30
+  # Register 108 — Tp exhaust/discharge gas temperature °C (values >120°C indicate a problem)
+
+- name: clivet_th_suction_gas
+  address: 109
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_th_suction_gas
+  scan_interval: 30
+  # Register 109 — Th return/suction gas temperature °C (used for superheat calculation)
+
+- name: clivet_t1_backup_heater_outlet
+  address: 110
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_t1_backup_heater_outlet
+  scan_interval: 30
+  # Register 110 — T1 backup heater outlet water temperature °C
+
+- name: clivet_t1b_zone2_flow
+  address: 111
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_t1b_zone2_flow
+  scan_interval: 30
+  # Register 111 — T1B Zone 2 flow temperature °C (2-zone kit only; may read 0 if not installed)
+
+- name: clivet_t2_refrigerant_liquid
+  address: 112
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_t2_refrigerant_liquid
+  scan_interval: 30
+  # Register 112 — T2 refrigerant liquid temperature °C
+
+- name: clivet_t2b_refrigerant_gas
+  address: 113
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_t2b_refrigerant_gas
+  scan_interval: 30
+  # Register 113 — T2B refrigerant gas temperature °C
+
+- name: clivet_ta_room_air
+  address: 114
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_ta_room_air
+  scan_interval: 30
+  # Register 114 — Ta indoor/room air temperature °C
+
+- name: clivet_t5_dhw_tank
+  address: 115
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_t5_dhw_tank
+  scan_interval: 30
+  # Register 115 — T5 DHW (domestic hot water) tank temperature °C
+
+- name: clivet_high_pressure
+  address: 116
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "kPa"
+  device_class: pressure
+  unique_id: clivet_high_pressure
+  scan_interval: 30
+  # Register 116 — Refrigerant high-side pressure kPa
+
+- name: clivet_low_pressure
+  address: 117
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "kPa"
+  device_class: pressure
+  unique_id: clivet_low_pressure
+  scan_interval: 30
+  # Register 117 — Refrigerant low-side pressure kPa (may not report on all models)
+
+- name: clivet_odu_current
+  address: 118
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "A"
+  device_class: current
+  unique_id: clivet_odu_current
+  scan_interval: 30
+  # Register 118 — ODU supply current A
+
+- name: clivet_odu_voltage
+  address: 119
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "V"
+  device_class: voltage
+  unique_id: clivet_odu_voltage
+  scan_interval: 30
+  # Register 119 — ODU supply voltage V (may not report on all models)
+
+- name: clivet_tbt1_buffer_tank
+  address: 120
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_tbt1_buffer_tank
+  scan_interval: 30
+  # Register 120 — Tbt1 buffer tank temperature °C
+
+- name: clivet_tbt2_secondary_tank
+  address: 121
+  slave: 1
+  input_type: holding
+  data_type: int16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "°C"
+  device_class: temperature
+  unique_id: clivet_tbt2_secondary_tank
+  scan_interval: 30
+  # Register 121 — Tbt2 secondary buffer tank temperature °C
+
+- name: clivet_compressor_run_hours
+  address: 122
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "h"
+  device_class: duration
+  unique_id: clivet_compressor_run_hours
+  scan_interval: 30
+  # Register 122 — Compressor cumulative running time hours
+
+- name: clivet_unit_type
+  address: 123
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_unit_type
+  scan_interval: 30
+  # Register 123 — Unit type / capacity identifier code
+
+- name: clivet_current_fault_code
+  address: 124
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_current_fault_code
+  scan_interval: 30
+  # Register 124 — Current active fault code (0 = no fault)
+
+- name: clivet_historical_fault_1
+  address: 125
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_historical_fault_1
+  scan_interval: 30
+  # Register 125 — Historical fault code 1 (most recent stored fault)
+
+- name: clivet_historical_fault_2
+  address: 126
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_historical_fault_2
+  scan_interval: 30
+  # Register 126 — Historical fault code 2
+
+- name: clivet_historical_fault_3
+  address: 127
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unique_id: clivet_historical_fault_3
+  scan_interval: 30
+  # Register 127 — Historical fault code 3 (oldest stored fault)

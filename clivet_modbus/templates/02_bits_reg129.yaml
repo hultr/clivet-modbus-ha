@@ -1,0 +1,96 @@
+# Binary sensors extracted from register 129 — ODU load output bitmask
+# Source sensor: sensor.clivet_load_output_bits
+
+- binary_sensor:
+    - name: "Clivet IBH1 Running"
+      unique_id: clivet_bit_reg129_ibh1
+      # Register 129, BIT0 — Inline backup heater 1 (IBH1) is energised
+      state: "{{ (states('sensor.clivet_load_output_bits') | int(0)) | bitwise_and(1) != 0 }}"
+      device_class: running
+
+    - name: "Clivet IBH2 Running"
+      unique_id: clivet_bit_reg129_ibh2
+      # Register 129, BIT1 — Inline backup heater 2 (IBH2) is energised
+      state: "{{ (states('sensor.clivet_load_output_bits') | int(0)) | bitwise_and(2) != 0 }}"
+      device_class: running
+
+    - name: "Clivet TBH Running"
+      unique_id: clivet_bit_reg129_tbh
+      # Register 129, BIT2 — Tank backup heater (TBH/electric immersion) is energised
+      state: "{{ (states('sensor.clivet_load_output_bits') | int(0)) | bitwise_and(4) != 0 }}"
+      device_class: running
+
+    - name: "Clivet Water Pump PUMP_I Running"
+      unique_id: clivet_bit_reg129_pump_i
+      # Register 129, BIT3 — Primary hydronic water pump (PUMP_I) is running
+      state: "{{ (states('sensor.clivet_load_output_bits') | int(0)) | bitwise_and(8) != 0 }}"
+      device_class: running
+
+    - name: "Clivet SV1 Active"
+      unique_id: clivet_bit_reg129_sv1
+      # Register 129, BIT4 — Solenoid valve 1 (SV1) is open/energised
+      state: "{{ (states('sensor.clivet_load_output_bits') | int(0)) | bitwise_and(16) != 0 }}"
+
+    - name: "Clivet SV2 Active"
+      unique_id: clivet_bit_reg129_sv2
+      # Register 129, BIT5 — Solenoid valve 2 (SV2) is open/energised
+      state: "{{ (states('sensor.clivet_load_output_bits') | int(0)) | bitwise_and(32) != 0 }}"
+
+    - name: "Clivet External Pump P_o Running"
+      unique_id: clivet_bit_reg129_pump_o
+      # Register 129, BIT6 — External circulation pump (P_o) is running
+      state: "{{ (states('sensor.clivet_load_output_bits') | int(0)) | bitwise_and(64) != 0 }}"
+      device_class: running
+
+    - name: "Clivet DHW Recirc Pump P_D Running"
+      unique_id: clivet_bit_reg129_pump_d
+      # Register 129, BIT7 — DHW recirculation pump (P_D) is running
+      state: "{{ (states('sensor.clivet_load_output_bits') | int(0)) | bitwise_and(128) != 0 }}"
+      device_class: running
+
+    - name: "Clivet Mix Pump P_C Running"
+      unique_id: clivet_bit_reg129_pump_c
+      # Register 129, BIT8 — Mixing circuit pump (P_C) is running
+      state: "{{ (states('sensor.clivet_load_output_bits') | int(0)) | bitwise_and(256) != 0 }}"
+      device_class: running
+
+    - name: "Clivet SV3 Active"
+      unique_id: clivet_bit_reg129_sv3
+      # Register 129, BIT9 — Solenoid valve 3 (SV3) is open/energised
+      state: "{{ (states('sensor.clivet_load_output_bits') | int(0)) | bitwise_and(512) != 0 }}"
+
+    - name: "Clivet HEAT4 Active"
+      unique_id: clivet_bit_reg129_heat4
+      # Register 129, BIT10 — HEAT4 output is energised
+      state: "{{ (states('sensor.clivet_load_output_bits') | int(0)) | bitwise_and(1024) != 0 }}"
+      device_class: heat
+
+    - name: "Clivet Solar Pump Pump_S Running"
+      unique_id: clivet_bit_reg129_pump_s
+      # Register 129, BIT11 — Solar thermal pump (Pump_S) is running (solar kit only)
+      state: "{{ (states('sensor.clivet_load_output_bits') | int(0)) | bitwise_and(2048) != 0 }}"
+      device_class: running
+
+    - name: "Clivet Alarm Output Active"
+      unique_id: clivet_bit_reg129_alarm
+      # Register 129, BIT12 — System alarm output relay is energised
+      state: "{{ (states('sensor.clivet_load_output_bits') | int(0)) | bitwise_and(4096) != 0 }}"
+      device_class: problem
+
+    - name: "Clivet Compressor Running"
+      unique_id: clivet_bit_reg129_compressor_on
+      # Register 129, BIT13 — Compressor is running
+      state: "{{ (states('sensor.clivet_load_output_bits') | int(0)) | bitwise_and(8192) != 0 }}"
+      device_class: running
+
+    - name: "Clivet External Heat Source Active"
+      unique_id: clivet_bit_reg129_ext_heat_source
+      # Register 129, BIT14 — External heat source (AHS) output is active
+      state: "{{ (states('sensor.clivet_load_output_bits') | int(0)) | bitwise_and(16384) != 0 }}"
+      device_class: heat
+
+    - name: "Clivet Defrost Output Active"
+      unique_id: clivet_bit_reg129_defrost
+      # Register 129, BIT15 — Defrost output/relay is active
+      state: "{{ (states('sensor.clivet_load_output_bits') | int(0)) | bitwise_and(32768) != 0 }}"
+      device_class: running
