@@ -49,7 +49,7 @@ views:
               left: 61%
               font-size: 50%
           - type: state-label
-            entity: sensor.hp_t5_dhw_tank
+            entity: sensor.hp_dhw_tank_temperature
             style:
               top: 51%
               left: 79%
@@ -63,19 +63,19 @@ views:
               left: 79%
               font-size: 50%
           - type: state-label
-            entity: sensor.hp_tw_in
+            entity: sensor.hp_hydronic_return_temperature
             style:
               top: 78%
               left: 54.5%
               font-size: 50%
           - type: state-label
-            entity: sensor.hp_tw_out
+            entity: sensor.hp_hydronic_supply_temperature
             style:
               top: 24%
               left: 54.5%
               font-size: 50%
           - type: state-label
-            entity: sensor.hp_curve1_t1s_output
+            entity: sensor.hp_zone1_curve_flow_temperature
             prefix: (
             suffix: )
             style:
@@ -119,7 +119,7 @@ views:
               left: 45%
               font-size: 50%
           - type: state-label
-            entity: sensor.hp_operating_frequency
+            entity: sensor.hp_compressor_operating_frequency
             prefix: null
             style:
               top: 38%

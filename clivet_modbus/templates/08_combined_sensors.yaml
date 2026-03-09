@@ -61,8 +61,8 @@
       unique_id: tpl_water_delta_temp
       # Register 105 (outlet) - Register 104 (inlet) = ΔT for heat calculations
       state: >-
-        {% set outlet = states('sensor.hp_tw_out') | float(none) %}
-        {% set inlet = states('sensor.hp_tw_in') | float(none) %}
+        {% set outlet = states('sensor.hp_hydronic_supply_temperature') | float(none) %}
+        {% set inlet = states('sensor.hp_hydronic_return_temperature') | float(none) %}
         {% if outlet is not none and inlet is not none %}
           {{ (outlet - inlet) | round(1) }}
         {% else %}
