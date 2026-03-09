@@ -1,0 +1,217 @@
+views:
+  - title: Heatpump
+    path: heatpump
+    type: panel
+    badges: []
+    cards:
+      - type: picture-elements
+        elements:
+          - type: image
+            image: local/heat_pump_viz/compressor_on.png
+            entity: binary_sensor.hp_compressor_running
+            tap_action:
+              action: none
+            state_filter:
+              'on': opacity(100)
+              'off': opacity(0)
+            style:
+              top: 50%
+              left: 50%
+              width: 100%
+          - type: state-label
+            entity: sensor.hp_pmv_opening
+            style:
+              top: 63%
+              left: 27%
+              font-size: 50%
+          - type: state-label
+            entity: sensor.hp_t1_backup_heater_outlet
+            style:
+              top: 24%
+              left: 92%
+              font-size: 50%
+          - type: state-label
+            entity: sensor.hp_t2_refrigerant_liquid
+            style:
+              top: 78%
+              left: 41.5%
+              font-size: 50%
+          - type: state-label
+            entity: sensor.hp_t2b_refrigerant_gas
+            style:
+              top: 24%
+              left: 41.5%
+              font-size: 50%
+          - type: state-label
+            entity: sensor.hp_water_flow
+            style:
+              top: 66%
+              left: 61%
+              font-size: 50%
+          - type: state-label
+            entity: sensor.hp_t5_dhw_tank
+            style:
+              top: 51%
+              left: 79%
+              font-size: 50%
+          - type: state-label
+            entity: sensor.hp_dhw_setpoint
+            prefix: (
+            suffix: )
+            style:
+              top: 55%
+              left: 79%
+              font-size: 50%
+          - type: state-label
+            entity: sensor.hp_tw_in
+            style:
+              top: 78%
+              left: 54.5%
+              font-size: 50%
+          - type: state-label
+            entity: sensor.hp_tw_out
+            style:
+              top: 24%
+              left: 54.5%
+              font-size: 50%
+          - type: state-label
+            entity: sensor.hp_curve1_t1s_output
+            prefix: (
+            suffix: )
+            style:
+              top: 30%
+              left: 91%
+              font-size: 50%
+          - type: state-label
+            entity: sensor.hp_tp_discharge_gas
+            style:
+              top: 24%
+              left: 33%
+              font-size: 50%
+          - type: state-label
+            entity: sensor.hp_t4_outdoor_ambient
+            style:
+              top: 35%
+              left: 7%
+              font-size: 50%
+          - type: state-label
+            entity: sensor.hp_th_suction_gas
+            style:
+              top: 24%
+              left: 20%
+              font-size: 50%
+          - type: state-label
+            entity: sensor.hp_high_pressure
+            style:
+              top: 32%
+              left: 33%
+              font-size: 30%
+          - type: state-label
+            entity: sensor.hp_low_pressure
+            style:
+              top: 32%
+              left: 20%
+              font-size: 30%
+          - type: state-label
+            entity: sensor.hp_heat_delivered
+            style:
+              top: 10%
+              left: 45%
+              font-size: 50%
+          - type: state-label
+            entity: sensor.hp_operating_frequency
+            prefix: null
+            style:
+              top: 38%
+              left: 27%
+              font-size: 50%
+          - type: state-label
+            entity: sensor.hp_fan_speed
+            style:
+              top: 65%
+              left: 7%
+              font-size: 50%
+          - type: state-label
+            entity: sensor.hp_odu_power_consumption
+            style:
+              top: 9%
+              left: 23%
+              font-size: 50%
+          - type: image
+            tap_action:
+              action: none
+            image: local/heat_pump_viz/fan_on.png
+            entity: binary_sensor.hp_fan_running
+            state_filter:
+              'on': opacity(100)
+              'off': opacity(0)
+            style:
+              top: 50%
+              left: 50%
+              width: 100%
+          - type: image
+            tap_action:
+              action: none
+            image: local/heat_pump_viz/water_pump_on2.png
+            entity: binary_sensor.hp_water_pump_pump_i_running
+            state_filter:
+              'on': opacity(100)
+              'off': opacity(0)
+            style:
+              top: 50%
+              left: 49.95%
+              width: 100%
+          - type: image
+            tap_action:
+              action: none
+            image: local/heat_pump_viz/ibh2_on.png
+            entity: binary_sensor.hp_ibh1_running
+            state_filter:
+              'on': opacity(100)
+              'off': opacity(0)
+            style:
+              top: 50%
+              left: 50%
+              width: 100%
+          - type: image
+            tap_action:
+              action: none
+            image: local/heat_pump_viz/odu_power.png
+            entity: binary_sensor.hp_power_to_odu
+            style:
+              top: 50%
+              left: 50%
+              width: 100%
+          - type: image
+            tap_action:
+              action: none
+            image: local/heat_pump_viz/heat_transfer.png
+            entity: binary_sensor.hp_power_to_odu
+            style:
+              top: 10%
+              left: 37%
+              width: 5%
+          - type: image
+            tap_action:
+              action: none
+            image: local/heat_pump_viz/tbh_on.png
+            entity: binary_sensor.hp_tbh_running
+            state_filter:
+              'on': opacity(100)
+              'off': opacity(0)
+            style:
+              top: 50%
+              left: 50%
+              width: 100%
+          - type: image
+            tap_action:
+              action: none
+            image: local/heat_pump_viz/valve_dhw_mode.png
+            entity: binary_sensor.hp_sv2_active
+            state_image:
+              'on': local/heat_pump_viz/valve_heat_mode.png
+            style:
+              top: 50%
+              left: 50%
+              width: 100%
+        image: local/heat_pump_viz/background_3.png

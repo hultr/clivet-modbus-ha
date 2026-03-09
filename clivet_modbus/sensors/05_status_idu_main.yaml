@@ -6,7 +6,7 @@
 # in this file. (YAML anchor; referenced as *scan_interval throughout)
 # ─────────────────────────────────────────────────────────────────────────────
 
-- name: idu_operation_mode
+- name: hp_idu_operation_mode
   address: 1000
   slave: 1
   input_type: holding
@@ -14,10 +14,10 @@
   scale: 1
   precision: 0
   scan_interval: &scan_interval 15   # ← change this value to repoll all sensors
-  unique_id: idu_operation_mode
+  unique_id: hp_idu_operation_mode
   # Register 1000 — IDU operating mode: 0=OFF, 2=COOL, 3=HEAT
 
-- name: com_rps_compressor
+- name: hp_com_rps_compressor
   address: 1001
   slave: 1
   input_type: holding
@@ -27,10 +27,10 @@
   unit_of_measurement: "Hz"
   device_class: frequency
   scan_interval: *scan_interval
-  unique_id: com_rps_compressor
+  unique_id: hp_com_rps_compressor
   # Register 1001 — Com. rps compressor speed reported from IDU telemetry Hz
 
-- name: twi_water_inlet
+- name: hp_twi_water_inlet
   address: 1002
   slave: 1
   input_type: holding
@@ -40,10 +40,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: twi_water_inlet
+  unique_id: hp_twi_water_inlet
   # Register 1002 — Twi water inlet temperature °C (IDU side)
 
-- name: two_water_outlet
+- name: hp_two_water_outlet
   address: 1003
   slave: 1
   input_type: holding
@@ -53,10 +53,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: two_water_outlet
+  unique_id: hp_two_water_outlet
   # Register 1003 — Two water outlet temperature °C (IDU side)
 
-- name: tsolar_idu
+- name: hp_tsolar_idu
   address: 1004
   slave: 1
   input_type: holding
@@ -66,10 +66,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: tsolar_idu
+  unique_id: hp_tsolar_idu
   # Register 1004 — Tsolar solar panel temperature °C as seen by IDU (solar kit only)
 
-- name: slave_unit_error_code
+- name: hp_slave_unit_error_code
   address: 1005
   slave: 1
   input_type: holding
@@ -77,10 +77,10 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: slave_unit_error_code
+  unique_id: hp_slave_unit_error_code
   # Register 1005 — Slave unit error code (cascade / multi-unit installations)
 
-- name: p6_error
+- name: hp_p6_error
   address: 1006
   slave: 1
   input_type: holding
@@ -88,5 +88,5 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: p6_error
+  unique_id: hp_p6_error
   # Register 1006 — P6 error code (reserved; may always read 0)

@@ -1,26 +1,26 @@
 # Simple binary sensors derived from basic threshold checks
 
 - binary_sensor:
-    - name: "Fan Running"
+    - name: "HP Fan Running"
       unique_id: bin_fan_running
       # Fan is running when ODU fan speed > 0 RPM
       # Register 102 — returns unavailable if sensor not reporting
       state: >-
-        {% if states('sensor.fan_speed') | int(none) is not none %}
-          {{ (states('sensor.fan_speed') | int(0)) > 0 }}
+        {% if states('sensor.hp_fan_speed') | int(none) is not none %}
+          {{ (states('sensor.hp_fan_speed') | int(0)) > 0 }}
         {% else %}
           unavailable
         {% endif %}
       device_class: running
       icon: "mdi:fan"
 
-    - name: "Power to ODU"
+    - name: "HP Power to ODU"
       unique_id: bin_power_to_odu
       # ODU has power when AC current draw > 0 A (indicates compressor/system is active)
       # Register 118 — returns unavailable if sensor not reporting
       state: >-
-        {% if states('sensor.odu_current') | int(none) is not none %}
-          {{ (states('sensor.odu_current') | int(0)) > 0 }}
+        {% if states('sensor.hp_odu_current') | int(none) is not none %}
+          {{ (states('sensor.hp_odu_current') | int(0)) > 0 }}
         {% else %}
           unavailable
         {% endif %}

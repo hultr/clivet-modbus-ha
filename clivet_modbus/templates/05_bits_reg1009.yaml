@@ -2,48 +2,48 @@
 # Source sensor: sensor.idu_load_bits
 
 - binary_sensor:
-    - name: "IDU IBH1 Running"
+    - name: "HP IDU IBH1 Running"
       unique_id: bit_reg1009_ibh1
       # Register 1009, BIT0 — IDU inline backup heater 1 (IBH1) is running
-      state: "{{ (states('sensor.idu_load_bits') | int(0)) | bitwise_and(1) != 0 }}"
+      state: "{{ (states('sensor.hp_idu_load_bits') | int(0)) | bitwise_and(1) != 0 }}"
       device_class: running
 
-    - name: "IDU IBH2 Running"
+    - name: "HP IDU IBH2 Running"
       unique_id: bit_reg1009_ibh2
       # Register 1009, BIT1 — IDU inline backup heater 2 (IBH2) is running
-      state: "{{ (states('sensor.idu_load_bits') | int(0)) | bitwise_and(2) != 0 }}"
+      state: "{{ (states('sensor.hp_idu_load_bits') | int(0)) | bitwise_and(2) != 0 }}"
       device_class: running
 
-    - name: "IDU Load Bit2 Reserved"
+    - name: "HP IDU Load Bit2 Reserved"
       unique_id: bit_reg1009_bit2
       # Register 1009, BIT2 — Reserved (no documented function)
-      state: "{{ (states('sensor.idu_load_bits') | int(0)) | bitwise_and(4) != 0 }}"
+      state: "{{ (states('sensor.hp_idu_load_bits') | int(0)) | bitwise_and(4) != 0 }}"
 
-    - name: "IDU Water Pump PUMP_i Running"
+    - name: "HP IDU Water Pump PUMP_i Running"
       unique_id: bit_reg1009_pump_i
       # Register 1009, BIT3 — IDU water pump (PUMP_i) is running
-      state: "{{ (states('sensor.idu_load_bits') | int(0)) | bitwise_and(8) != 0 }}"
+      state: "{{ (states('sensor.hp_idu_load_bits') | int(0)) | bitwise_and(8) != 0 }}"
       device_class: running
 
-    - name: "IDU Run Command Active"
+    - name: "HP IDU Run Command Active"
       unique_id: bit_reg1009_run_cmd
       # Register 1009, BIT4 — RUN command is active (unit commanded to operate)
-      state: "{{ (states('sensor.idu_load_bits') | int(0)) | bitwise_and(16) != 0 }}"
+      state: "{{ (states('sensor.hp_idu_load_bits') | int(0)) | bitwise_and(16) != 0 }}"
       device_class: running
 
-    - name: "IDU Defrost Output Active"
+    - name: "HP IDU Defrost Output Active"
       unique_id: bit_reg1009_defrost
       # Register 1009, BIT5 — Defrost output from IDU is active
-      state: "{{ (states('sensor.idu_load_bits') | int(0)) | bitwise_and(32) != 0 }}"
+      state: "{{ (states('sensor.hp_idu_load_bits') | int(0)) | bitwise_and(32) != 0 }}"
       device_class: running
 
-    - name: "IDU Load Bit6 Reserved"
+    - name: "HP IDU Load Bit6 Reserved"
       unique_id: bit_reg1009_bit6
       # Register 1009, BIT6 — Reserved (no documented function)
-      state: "{{ (states('sensor.idu_load_bits') | int(0)) | bitwise_and(64) != 0 }}"
+      state: "{{ (states('sensor.hp_idu_load_bits') | int(0)) | bitwise_and(64) != 0 }}"
 
-    - name: "IDU Crankcase Heater HEAT4 Active"
+    - name: "HP IDU Crankcase Heater HEAT4 Active"
       unique_id: bit_reg1009_heat4
       # Register 1009, BIT7 — Compressor crankcase heater (HEAT4) is energised
-      state: "{{ (states('sensor.idu_load_bits') | int(0)) | bitwise_and(128) != 0 }}"
+      state: "{{ (states('sensor.hp_idu_load_bits') | int(0)) | bitwise_and(128) != 0 }}"
       device_class: heat

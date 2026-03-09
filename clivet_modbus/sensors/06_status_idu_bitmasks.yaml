@@ -8,7 +8,7 @@
 # in this file. (YAML anchor; referenced as *scan_interval throughout)
 # ─────────────────────────────────────────────────────────────────────────────
 
-- name: idu_status_1
+- name: hp_idu_status_1
   address: 1007
   slave: 1
   input_type: holding
@@ -16,11 +16,11 @@
   scale: 1
   precision: 0
   scan_interval: &scan_interval 15   # ← change this value to repoll all sensors
-  unique_id: idu_status_1
+  unique_id: hp_idu_status_1
   # Register 1007 — IDU status bitmask 1
   # BIT0=Defrost, BIT1=Anti-freeze, BIT2=Oil return, BIT3–7=Reserved
 
-- name: idu_status_2
+- name: hp_idu_status_2
   address: 1008
   slave: 1
   input_type: holding
@@ -28,12 +28,12 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: idu_status_2
+  unique_id: hp_idu_status_2
   # Register 1008 — IDU status bitmask 2
   # BIT0=Cool active, BIT1=Heat active, BIT2=DHW active, BIT3=IBH installed,
   # BIT4=T1 sensor installed, BIT5–7=Reserved
 
-- name: idu_load_bits
+- name: hp_idu_load_bits
   address: 1009
   slave: 1
   input_type: holding
@@ -41,7 +41,7 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: idu_load_bits
+  unique_id: hp_idu_load_bits
   # Register 1009 — IDU load output bitmask
   # BIT0=IBH1 running, BIT1=IBH2 running, BIT2=Reserved, BIT3=water pump PUMP_i,
   # BIT4=RUN command, BIT5=DEFROST, BIT6=Reserved, BIT7=crankcase heater HEAT4

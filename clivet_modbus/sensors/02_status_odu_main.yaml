@@ -6,7 +6,7 @@
 # in this file. (YAML anchor; referenced as *scan_interval throughout)
 # ─────────────────────────────────────────────────────────────────────────────
 
-- name: operating_frequency
+- name: hp_operating_frequency
   address: 100
   slave: 1
   input_type: holding
@@ -16,10 +16,10 @@
   unit_of_measurement: "Hz"
   device_class: frequency
   scan_interval: &scan_interval 15   # ← change this value to repoll all sensors
-  unique_id: operating_frequency
+  unique_id: hp_operating_frequency
   # Register 100 — Compressor operating frequency Hz; 0 = compressor off
 
-- name: operating_mode
+- name: hp_operating_mode
   address: 101
   slave: 1
   input_type: holding
@@ -27,12 +27,12 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: operating_mode
+  unique_id: hp_operating_mode
   # Register 101 — ODU operating mode: 0=OFF, 2=COOL, 3=HEAT
   # Note: Swedish manual has a printing error for this register
   # See templates/08_combined_sensors.yaml for decoded mode name sensor
 
-- name: fan_speed
+- name: hp_fan_speed
   address: 102
   slave: 1
   input_type: holding
@@ -41,10 +41,10 @@
   precision: 0
   unit_of_measurement: "rpm"
   scan_interval: *scan_interval
-  unique_id: fan_speed
+  unique_id: hp_fan_speed
   # Register 102 — ODU fan speed rpm
 
-- name: pmv_opening
+- name: hp_pmv_opening
   address: 103
   slave: 1
   input_type: holding
@@ -53,10 +53,10 @@
   precision: 0
   unit_of_measurement: "pulses"
   scan_interval: *scan_interval
-  unique_id: pmv_opening
+  unique_id: hp_pmv_opening
   # Register 103 — PMV/EXV electronic expansion valve opening in pulses (steps of 8 only)
 
-- name: tw_in
+- name: hp_tw_in
   address: 104
   slave: 1
   input_type: holding
@@ -66,10 +66,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: tw_in
+  unique_id: hp_tw_in
   # Register 104 — TW_in water inlet temperature °C (return from the hydronic system)
 
-- name: tw_out
+- name: hp_tw_out
   address: 105
   slave: 1
   input_type: holding
@@ -79,10 +79,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: tw_out
+  unique_id: hp_tw_out
   # Register 105 — TW_out water outlet temperature °C (supply to the hydronic system)
 
-- name: t3_condenser
+- name: hp_t3_condenser
   address: 106
   slave: 1
   input_type: holding
@@ -92,10 +92,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: t3_condenser
+  unique_id: hp_t3_condenser
   # Register 106 — T3 condenser/coil temperature °C (NOT outdoor ambient on this unit)
 
-- name: t4_outdoor_ambient
+- name: hp_t4_outdoor_ambient
   address: 107
   slave: 1
   input_type: holding
@@ -105,10 +105,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: t4_outdoor_ambient
+  unique_id: hp_t4_outdoor_ambient
   # Register 107 — T4 outdoor ambient air temperature °C
 
-- name: tp_discharge_gas
+- name: hp_tp_discharge_gas
   address: 108
   slave: 1
   input_type: holding
@@ -118,10 +118,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: tp_discharge_gas
+  unique_id: hp_tp_discharge_gas
   # Register 108 — Tp exhaust/discharge gas temperature °C (values >120°C indicate a problem)
 
-- name: th_suction_gas
+- name: hp_th_suction_gas
   address: 109
   slave: 1
   input_type: holding
@@ -131,10 +131,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: th_suction_gas
+  unique_id: hp_th_suction_gas
   # Register 109 — Th return/suction gas temperature °C (used for superheat calculation)
 
-- name: t1_backup_heater_outlet
+- name: hp_t1_backup_heater_outlet
   address: 110
   slave: 1
   input_type: holding
@@ -144,10 +144,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: t1_backup_heater_outlet
+  unique_id: hp_t1_backup_heater_outlet
   # Register 110 — T1 backup heater outlet water temperature °C
 
-- name: t1b_zone2_flow
+- name: hp_t1b_zone2_flow
   address: 111
   slave: 1
   input_type: holding
@@ -157,10 +157,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: t1b_zone2_flow
+  unique_id: hp_t1b_zone2_flow
   # Register 111 — T1B Zone 2 flow temperature °C (2-zone kit only; may read 0 if not installed)
 
-- name: t2_refrigerant_liquid
+- name: hp_t2_refrigerant_liquid
   address: 112
   slave: 1
   input_type: holding
@@ -170,10 +170,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: t2_refrigerant_liquid
+  unique_id: hp_t2_refrigerant_liquid
   # Register 112 — T2 refrigerant liquid temperature °C
 
-- name: t2b_refrigerant_gas
+- name: hp_t2b_refrigerant_gas
   address: 113
   slave: 1
   input_type: holding
@@ -183,10 +183,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: t2b_refrigerant_gas
+  unique_id: hp_t2b_refrigerant_gas
   # Register 113 — T2B refrigerant gas temperature °C
 
-- name: ta_room_air
+- name: hp_ta_room_air
   address: 114
   slave: 1
   input_type: holding
@@ -196,10 +196,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: ta_room_air
+  unique_id: hp_ta_room_air
   # Register 114 — Ta indoor/room air temperature °C
 
-- name: t5_dhw_tank
+- name: hp_t5_dhw_tank
   address: 115
   slave: 1
   input_type: holding
@@ -209,10 +209,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: t5_dhw_tank
+  unique_id: hp_t5_dhw_tank
   # Register 115 — T5 DHW (domestic hot water) tank temperature °C
 
-- name: high_pressure
+- name: hp_high_pressure
   address: 116
   slave: 1
   input_type: holding
@@ -222,10 +222,10 @@
   unit_of_measurement: "kPa"
   device_class: pressure
   scan_interval: *scan_interval
-  unique_id: high_pressure
+  unique_id: hp_high_pressure
   # Register 116 — Refrigerant high-side pressure kPa
 
-- name: low_pressure
+- name: hp_low_pressure
   address: 117
   slave: 1
   input_type: holding
@@ -235,10 +235,10 @@
   unit_of_measurement: "kPa"
   device_class: pressure
   scan_interval: *scan_interval
-  unique_id: low_pressure
+  unique_id: hp_low_pressure
   # Register 117 — Refrigerant low-side pressure kPa (may not report on all models)
 
-- name: odu_current
+- name: hp_odu_current
   address: 118
   slave: 1
   input_type: holding
@@ -248,10 +248,10 @@
   unit_of_measurement: "A"
   device_class: current
   scan_interval: *scan_interval
-  unique_id: odu_current
+  unique_id: hp_odu_current
   # Register 118 — ODU supply current A
 
-- name: odu_voltage
+- name: hp_odu_voltage
   address: 119
   slave: 1
   input_type: holding
@@ -261,10 +261,10 @@
   unit_of_measurement: "V"
   device_class: voltage
   scan_interval: *scan_interval
-  unique_id: odu_voltage
+  unique_id: hp_odu_voltage
   # Register 119 — ODU supply voltage V (may not report on all models)
 
-- name: tbt1_buffer_tank
+- name: hp_tbt1_buffer_tank
   address: 120
   slave: 1
   input_type: holding
@@ -274,10 +274,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: tbt1_buffer_tank
+  unique_id: hp_tbt1_buffer_tank
   # Register 120 — Tbt1 buffer tank temperature °C
 
-- name: tbt2_secondary_tank
+- name: hp_tbt2_secondary_tank
   address: 121
   slave: 1
   input_type: holding
@@ -287,10 +287,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: tbt2_secondary_tank
+  unique_id: hp_tbt2_secondary_tank
   # Register 121 — Tbt2 secondary buffer tank temperature °C
 
-- name: compressor_run_hours
+- name: hp_compressor_run_hours
   address: 122
   slave: 1
   input_type: holding
@@ -300,10 +300,10 @@
   unit_of_measurement: "h"
   device_class: duration
   scan_interval: *scan_interval
-  unique_id: compressor_run_hours
+  unique_id: hp_compressor_run_hours
   # Register 122 — Compressor cumulative running time hours
 
-- name: unit_type
+- name: hp_unit_type
   address: 123
   slave: 1
   input_type: holding
@@ -311,10 +311,10 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: unit_type
+  unique_id: hp_unit_type
   # Register 123 — Unit type / capacity identifier code
 
-- name: current_fault_code
+- name: hp_current_fault_code
   address: 124
   slave: 1
   input_type: holding
@@ -322,10 +322,10 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: current_fault_code
+  unique_id: hp_current_fault_code
   # Register 124 — Current active fault code (0 = no fault)
 
-- name: historical_fault_1
+- name: hp_historical_fault_1
   address: 125
   slave: 1
   input_type: holding
@@ -333,10 +333,10 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: historical_fault_1
+  unique_id: hp_historical_fault_1
   # Register 125 — Historical fault code 1 (most recent stored fault)
 
-- name: historical_fault_2
+- name: hp_historical_fault_2
   address: 126
   slave: 1
   input_type: holding
@@ -344,10 +344,10 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: historical_fault_2
+  unique_id: hp_historical_fault_2
   # Register 126 — Historical fault code 2
 
-- name: historical_fault_3
+- name: hp_historical_fault_3
   address: 127
   slave: 1
   input_type: holding
@@ -355,5 +355,5 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: historical_fault_3
+  unique_id: hp_historical_fault_3
   # Register 127 — Historical fault code 3 (oldest stored fault)

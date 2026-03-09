@@ -6,7 +6,7 @@
 # in this file. (YAML anchor; referenced as *scan_interval throughout)
 # ─────────────────────────────────────────────────────────────────────────────
 
-- name: onoff_register
+- name: hp_onoff_register
   address: 0
   slave: 1
   input_type: holding
@@ -14,11 +14,11 @@
   scale: 1
   precision: 0
   scan_interval: &scan_interval 60   # ← change this value to repoll all sensors
-  unique_id: onoff_register
+  unique_id: hp_onoff_register
   # Register 0 — ON/OFF bitmask: Bit0=TS room, Bit1=T1S zone1, Bit2=T5S DHW, Bit3=T2S zone2, Bit4–15 reserved
   # Raw bitmask — see templates/06_switches_reg0.yaml for individual bit switches
 
-- name: mode_setting
+- name: hp_mode_setting
   address: 1
   slave: 1
   input_type: holding
@@ -26,11 +26,11 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: mode_setting
+  unique_id: hp_mode_setting
   # Register 1 — Operating mode command: 1=Auto, 2=Cooling, 3=Heating
   # See templates/08_combined_sensors.yaml for decoded mode name sensor
 
-- name: t1s_packed
+- name: hp_t1s_packed
   address: 2
   slave: 1
   input_type: holding
@@ -38,10 +38,10 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: t1s_packed
+  unique_id: hp_t1s_packed
   # Register 2 — T1s packed: low byte=Zone1 flow setpoint °C, high byte=Zone2 flow setpoint °C
 
-- name: room_temp_setpoint
+- name: hp_room_temp_setpoint
   address: 3
   slave: 1
   input_type: holding
@@ -51,10 +51,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: room_temp_setpoint
+  unique_id: hp_room_temp_setpoint
   # Register 3 — Room temperature setpoint Ts 17–30°C; raw = actual × 2, scale = 0.5
 
-- name: dhw_setpoint
+- name: hp_dhw_setpoint
   address: 4
   slave: 1
   input_type: holding
@@ -64,10 +64,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: dhw_setpoint
+  unique_id: hp_dhw_setpoint
   # Register 4 — T5s DHW tank setpoint 20–60°C (75°C when AHS is used)
 
-- name: function_register
+- name: hp_function_register
   address: 5
   slave: 1
   input_type: holding
@@ -75,13 +75,13 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: function_register
+  unique_id: hp_function_register
   # Register 5 — Function bitmask: Bit4=Sterilization, Bit5=Holiday away (RO), Bit6=Silent,
   # Bit7=Silent level2, Bit8=Holiday home (RO), Bit9=Reserved, Bit10=ECO, Bit11=DHW return pump,
   # Bit12=Zone1 curve, Bit13=Zone2 curve
   # Raw bitmask — see templates/07_switches_reg5.yaml for individual bit switches
 
-- name: curve_selection
+- name: hp_curve_selection
   address: 6
   slave: 1
   input_type: holding
@@ -89,10 +89,10 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: curve_selection
+  unique_id: hp_curve_selection
   # Register 6 — Curve selection: low byte=Zone1 curve 1–9, high byte=Zone2 curve 1–9
 
-- name: forced_hot_water
+- name: hp_forced_hot_water
   address: 7
   slave: 1
   input_type: holding
@@ -100,10 +100,10 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: forced_hot_water
+  unique_id: hp_forced_hot_water
   # Register 7 — Forced hot water: 0=disable, 1=Force ON, 2=Force OFF (TBH=tank backup heater)
 
-- name: force_tbh
+- name: hp_force_tbh
   address: 8
   slave: 1
   input_type: holding
@@ -111,11 +111,11 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: force_tbh
+  unique_id: hp_force_tbh
   # Register 8 — Force TBH (tank backup heater): 0=disable, 1=Force ON, 2=Force OFF
   # Cannot be ON simultaneously with register 9 (IBH) forced ON
 
-- name: force_ibh
+- name: hp_force_ibh
   address: 9
   slave: 1
   input_type: holding
@@ -123,11 +123,11 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: force_ibh
+  unique_id: hp_force_ibh
   # Register 9 — Force IBH (inline backup heater): 0=disable, 1=Force ON, 2=Force OFF
   # Cannot be ON simultaneously with register 8 (TBH) forced ON
 
-- name: timer
+- name: hp_timer
   address: 10
   slave: 1
   input_type: holding
@@ -136,10 +136,10 @@
   precision: 0
   unit_of_measurement: "h"
   scan_interval: *scan_interval
-  unique_id: timer
+  unique_id: hp_timer
   # Register 10 — Timer 0–24h (likely DHW schedule or activation delay)
 
-- name: zone1_flow_setpoint
+- name: hp_zone1_flow_setpoint
   address: 11
   slave: 1
   input_type: holding
@@ -149,10 +149,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: zone1_flow_setpoint
+  unique_id: hp_zone1_flow_setpoint
   # Register 11 — T1s Zone 1 flow temperature setpoint (dedicated; may mirror low byte of register 2)
 
-- name: zone2_flow_setpoint
+- name: hp_zone2_flow_setpoint
   address: 12
   slave: 1
   input_type: holding
@@ -162,5 +162,5 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: zone2_flow_setpoint
+  unique_id: hp_zone2_flow_setpoint
   # Register 12 — T1s Zone 2 flow temperature setpoint (dedicated; may mirror high byte of register 2)

@@ -8,7 +8,7 @@
 # in this file. (YAML anchor; referenced as *scan_interval throughout)
 # ─────────────────────────────────────────────────────────────────────────────
 
-- name: t1_primary_outlet
+- name: hp_t1_primary_outlet
   address: 1011
   slave: 1
   input_type: holding
@@ -18,10 +18,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: &scan_interval 15   # ← change this value to repoll all sensors
-  unique_id: t1_primary_outlet
+  unique_id: hp_t1_primary_outlet
   # Register 1011 — T1 primary water outlet temperature °C (0x7F = sensor error)
 
-- name: t1b_after_aux_heater
+- name: hp_t1b_after_aux_heater
   address: 1012
   slave: 1
   input_type: holding
@@ -31,10 +31,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: t1b_after_aux_heater
+  unique_id: hp_t1b_after_aux_heater
   # Register 1012 — T1B temperature after auxiliary heater °C (0x7F = sensor error)
 
-- name: t2_liquid_refrigerant_idu
+- name: hp_t2_liquid_refrigerant_idu
   address: 1013
   slave: 1
   input_type: holding
@@ -44,10 +44,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: t2_liquid_refrigerant_idu
+  unique_id: hp_t2_liquid_refrigerant_idu
   # Register 1013 — T2 liquid refrigerant temperature °C from IDU (0x7F = sensor error)
 
-- name: t2b_liquid_gas_refrigerant
+- name: hp_t2b_liquid_gas_refrigerant
   address: 1014
   slave: 1
   input_type: holding
@@ -57,10 +57,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: t2b_liquid_gas_refrigerant
+  unique_id: hp_t2b_liquid_gas_refrigerant
   # Register 1014 — T2B liquid/gas refrigerant temperature °C (0x7F = sensor error)
 
-- name: t5_dhw_idu
+- name: hp_t5_dhw_idu
   address: 1015
   slave: 1
   input_type: holding
@@ -70,10 +70,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: t5_dhw_idu
+  unique_id: hp_t5_dhw_idu
   # Register 1015 — T5 DHW tank temperature °C from IDU telemetry (0x7F = sensor error)
 
-- name: ta_indoor_air_idu
+- name: hp_ta_indoor_air_idu
   address: 1016
   slave: 1
   input_type: holding
@@ -83,10 +83,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: ta_indoor_air_idu
+  unique_id: hp_ta_indoor_air_idu
   # Register 1016 — Ta indoor air temperature °C from IDU telemetry (0x7F = sensor error)
 
-- name: tbt1_buffer_tank_idu
+- name: hp_tbt1_buffer_tank_idu
   address: 1017
   slave: 1
   input_type: holding
@@ -96,10 +96,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: tbt1_buffer_tank_idu
+  unique_id: hp_tbt1_buffer_tank_idu
   # Register 1017 — Tbt1 buffer tank temperature °C from IDU telemetry (0x7F = sensor error)
 
-- name: tbt2_secondary_tank_idu
+- name: hp_tbt2_secondary_tank_idu
   address: 1018
   slave: 1
   input_type: holding
@@ -109,10 +109,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: tbt2_secondary_tank_idu
+  unique_id: hp_tbt2_secondary_tank_idu
   # Register 1018 — Tbt2 secondary buffer tank temperature °C from IDU telemetry (0x7F = sensor error)
 
-- name: water_flow_idu
+- name: hp_water_flow_idu
   address: 1019
   slave: 1
   input_type: holding
@@ -121,10 +121,10 @@
   precision: 2
   unit_of_measurement: "m³/h"
   scan_interval: *scan_interval
-  unique_id: water_flow_idu
+  unique_id: hp_water_flow_idu
   # Register 1019 — Water flow rate m³/h from IDU; raw = actual × 100, scale = 0.01
 
-- name: unit_capacity_kw
+- name: hp_unit_capacity_kw
   address: 1020
   slave: 1
   input_type: holding
@@ -134,10 +134,10 @@
   unit_of_measurement: "kW"
   device_class: power
   scan_interval: *scan_interval
-  unique_id: unit_capacity_kw
+  unique_id: hp_unit_capacity_kw
   # Register 1020 — Unit type/nominal capacity kW (value equals the kW rating of the unit)
 
-- name: target_frequency_idu
+- name: hp_target_frequency_idu
   address: 1021
   slave: 1
   input_type: holding
@@ -147,10 +147,10 @@
   unit_of_measurement: "Hz"
   device_class: frequency
   scan_interval: *scan_interval
-  unique_id: target_frequency_idu
+  unique_id: hp_target_frequency_idu
   # Register 1021 — Target compressor frequency Hz as seen from IDU side
 
-- name: idu_software_version_2
+- name: hp_idu_software_version_2
   address: 1022
   slave: 1
   input_type: holding
@@ -158,10 +158,10 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: idu_software_version_2
+  unique_id: hp_idu_software_version_2
   # Register 1022 — IDU software version 1–99 (from IDU telemetry path)
 
-- name: idu_capacity_high_bits
+- name: hp_idu_capacity_high_bits
   address: 1023
   slave: 1
   input_type: holding
@@ -169,11 +169,11 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: idu_capacity_high_bits
+  unique_id: hp_idu_capacity_high_bits
   # Register 1023 — High 16 bits of IDU capacity counter
   # See templates/08_combined_sensors.yaml for 32-bit combined value in kW
 
-- name: idu_capacity_low_bits
+- name: hp_idu_capacity_low_bits
   address: 1024
   slave: 1
   input_type: holding
@@ -181,11 +181,11 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: idu_capacity_low_bits
+  unique_id: hp_idu_capacity_low_bits
   # Register 1024 — Low 16 bits of IDU capacity counter
   # See templates/08_combined_sensors.yaml for 32-bit combined value in kW
 
-- name: idu_capacity_scaled
+- name: hp_idu_capacity_scaled
   address: 1025
   slave: 1
   input_type: holding
@@ -195,10 +195,10 @@
   unit_of_measurement: "kW"
   device_class: power
   scan_interval: *scan_interval
-  unique_id: idu_capacity_scaled
+  unique_id: hp_idu_capacity_scaled
   # Register 1025 — IDU operating capacity kW; raw = actual × 100, scale = 0.01
 
-- name: fan_rpm_idu
+- name: hp_fan_rpm_idu
   address: 1026
   slave: 1
   input_type: holding
@@ -207,10 +207,10 @@
   precision: 0
   unit_of_measurement: "rpm"
   scan_interval: *scan_interval
-  unique_id: fan_rpm_idu
+  unique_id: hp_fan_rpm_idu
   # Register 1026 — Fan speed rpm from IDU telemetry
 
-- name: pmv_opening_idu
+- name: hp_pmv_opening_idu
   address: 1027
   slave: 1
   input_type: holding
@@ -219,10 +219,10 @@
   precision: 0
   unit_of_measurement: "pulses"
   scan_interval: *scan_interval
-  unique_id: pmv_opening_idu
+  unique_id: hp_pmv_opening_idu
   # Register 1027 — PMV/EXV expansion valve opening pulses from IDU (steps of 8)
 
-- name: t3_coil_idu
+- name: hp_t3_coil_idu
   address: 1028
   slave: 1
   input_type: holding
@@ -232,10 +232,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: t3_coil_idu
+  unique_id: hp_t3_coil_idu
   # Register 1028 — T3 coil temperature °C from IDU telemetry
 
-- name: t4_ambient_idu
+- name: hp_t4_ambient_idu
   address: 1029
   slave: 1
   input_type: holding
@@ -245,10 +245,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: t4_ambient_idu
+  unique_id: hp_t4_ambient_idu
   # Register 1029 — T4 outdoor ambient temperature °C from IDU telemetry
 
-- name: tp_discharge_idu
+- name: hp_tp_discharge_idu
   address: 1030
   slave: 1
   input_type: holding
@@ -258,10 +258,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: tp_discharge_idu
+  unique_id: hp_tp_discharge_idu
   # Register 1030 — Tp discharge/exhaust gas temperature °C from IDU telemetry
 
-- name: th_suction_idu
+- name: hp_th_suction_idu
   address: 1031
   slave: 1
   input_type: holding
@@ -271,10 +271,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: th_suction_idu
+  unique_id: hp_th_suction_idu
   # Register 1031 — Th suction gas temperature °C from IDU telemetry
 
-- name: tf_from_odu
+- name: hp_tf_from_odu
   address: 1032
   slave: 1
   input_type: holding
@@ -284,10 +284,10 @@
   unit_of_measurement: "°C"
   device_class: temperature
   scan_interval: *scan_interval
-  unique_id: tf_from_odu
+  unique_id: hp_tf_from_odu
   # Register 1032 — TF module temperature received from ODU °C (0x7F = invalid/not available)
 
-- name: high_pressure_idu
+- name: hp_high_pressure_idu
   address: 1033
   slave: 1
   input_type: holding
@@ -297,10 +297,10 @@
   unit_of_measurement: "kPa"
   device_class: pressure
   scan_interval: *scan_interval
-  unique_id: high_pressure_idu
+  unique_id: hp_high_pressure_idu
   # Register 1033 — Refrigerant high-side pressure kPa from IDU telemetry
 
-- name: low_pressure_idu
+- name: hp_low_pressure_idu
   address: 1034
   slave: 1
   input_type: holding
@@ -310,10 +310,10 @@
   unit_of_measurement: "kPa"
   device_class: pressure
   scan_interval: *scan_interval
-  unique_id: low_pressure_idu
+  unique_id: hp_low_pressure_idu
   # Register 1034 — Refrigerant low-side pressure kPa from IDU telemetry
 
-- name: dc_bus_current_idu
+- name: hp_dc_bus_current_idu
   address: 1035
   slave: 1
   input_type: holding
@@ -323,10 +323,10 @@
   unit_of_measurement: "A"
   device_class: current
   scan_interval: *scan_interval
-  unique_id: dc_bus_current_idu
+  unique_id: hp_dc_bus_current_idu
   # Register 1035 — DC bus current A from IDU telemetry
 
-- name: dc_bus_voltage_idu
+- name: hp_dc_bus_voltage_idu
   address: 1036
   slave: 1
   input_type: holding
@@ -336,10 +336,10 @@
   unit_of_measurement: "V"
   device_class: voltage
   scan_interval: *scan_interval
-  unique_id: dc_bus_voltage_idu
+  unique_id: hp_dc_bus_voltage_idu
   # Register 1036 — DC bus voltage V from IDU telemetry
 
-- name: odu_current_idu
+- name: hp_odu_current_idu
   address: 1037
   slave: 1
   input_type: holding
@@ -349,10 +349,10 @@
   unit_of_measurement: "A"
   device_class: current
   scan_interval: *scan_interval
-  unique_id: odu_current_idu
+  unique_id: hp_odu_current_idu
   # Register 1037 — ODU supply current A as seen from IDU telemetry
 
-- name: odu_voltage_idu
+- name: hp_odu_voltage_idu
   address: 1038
   slave: 1
   input_type: holding
@@ -362,10 +362,10 @@
   unit_of_measurement: "V"
   device_class: voltage
   scan_interval: *scan_interval
-  unique_id: odu_voltage_idu
+  unique_id: hp_odu_voltage_idu
   # Register 1038 — ODU supply voltage V as seen from IDU telemetry
 
-- name: odu_frequency_limit_solution
+- name: hp_odu_frequency_limit_solution
   address: 1039
   slave: 1
   input_type: holding
@@ -373,10 +373,10 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: odu_frequency_limit_solution
+  unique_id: hp_odu_frequency_limit_solution
   # Register 1039 — ODU frequency limitation solution/scheme identifier
 
-- name: idu_electrical_high_bits
+- name: hp_idu_electrical_high_bits
   address: 1040
   slave: 1
   input_type: holding
@@ -384,10 +384,10 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: idu_electrical_high_bits
+  unique_id: hp_idu_electrical_high_bits
   # Register 1040 — High 16 bits of IDU electrical energy counter
 
-- name: idu_electrical_low_bits
+- name: hp_idu_electrical_low_bits
   address: 1041
   slave: 1
   input_type: holding
@@ -395,10 +395,10 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: idu_electrical_low_bits
+  unique_id: hp_idu_electrical_low_bits
   # Register 1041 — Low 16 bits of IDU electrical energy counter
 
-- name: odu_software_version
+- name: hp_odu_software_version
   address: 1042
   slave: 1
   input_type: holding
@@ -406,5 +406,5 @@
   scale: 1
   precision: 0
   scan_interval: *scan_interval
-  unique_id: odu_software_version
+  unique_id: hp_odu_software_version
   # Register 1042 — ODU software version as reported through IDU telemetry
