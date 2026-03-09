@@ -1,29 +1,34 @@
 # ODU extended status registers (130–147)
 # scan_interval: 30 seconds
 
-- name: clivet_idu_software_version
+# ─────────────────────────────────────────────────────────────────────────────
+# SCAN INTERVAL — edit the value below to change the poll rate for ALL sensors
+# in this file. (YAML anchor; referenced as *scan_interval throughout)
+# ─────────────────────────────────────────────────────────────────────────────
+
+- name: idu_software_version
   address: 130
   slave: 1
   input_type: holding
   data_type: uint16
   scale: 1
   precision: 0
-  unique_id: clivet_idu_software_version
-  scan_interval: 30
+  scan_interval: &scan_interval 15   # ← change this value to repoll all sensors
+  unique_id: idu_software_version
   # Register 130 — IDU (indoor unit) software version 0–99
 
-- name: clivet_ui_software_version
+- name: ui_software_version
   address: 131
   slave: 1
   input_type: holding
   data_type: uint16
   scale: 1
   precision: 0
-  unique_id: clivet_ui_software_version
-  scan_interval: 30
+  scan_interval: *scan_interval
+  unique_id: ui_software_version
   # Register 131 — UI (user interface) software version 0–99
 
-- name: clivet_target_frequency
+- name: target_frequency
   address: 132
   slave: 1
   input_type: holding
@@ -32,11 +37,11 @@
   precision: 0
   unit_of_measurement: "Hz"
   device_class: frequency
-  unique_id: clivet_target_frequency
-  scan_interval: 30
+  scan_interval: *scan_interval
+  unique_id: target_frequency
   # Register 132 — Target compressor frequency Hz (compare with register 100 for actual frequency)
 
-- name: clivet_dc_bus_current
+- name: dc_bus_current
   address: 133
   slave: 1
   input_type: holding
@@ -45,11 +50,11 @@
   precision: 0
   unit_of_measurement: "A"
   device_class: current
-  unique_id: clivet_dc_bus_current
-  scan_interval: 30
+  scan_interval: *scan_interval
+  unique_id: dc_bus_current
   # Register 133 — DC bus current A
 
-- name: clivet_dc_bus_voltage
+- name: dc_bus_voltage
   address: 134
   slave: 1
   input_type: holding
@@ -58,11 +63,11 @@
   precision: 1
   unit_of_measurement: "V"
   device_class: voltage
-  unique_id: clivet_dc_bus_voltage
-  scan_interval: 30
+  scan_interval: *scan_interval
+  unique_id: dc_bus_voltage
   # Register 134 — DC bus voltage V; raw = actual / 10, so scale = 10 to recover actual value
 
-- name: clivet_tf_igbt_temperature
+- name: tf_igbt_temperature
   address: 135
   slave: 1
   input_type: holding
@@ -71,11 +76,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_tf_igbt_temperature
-  scan_interval: 30
+  scan_interval: *scan_interval
+  unique_id: tf_igbt_temperature
   # Register 135 — TF power module / IGBT temperature °C
 
-- name: clivet_curve1_t1s_output
+- name: curve1_t1s_output
   address: 136
   slave: 1
   input_type: holding
@@ -84,11 +89,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_curve1_t1s_output
-  scan_interval: 30
+  scan_interval: *scan_interval
+  unique_id: curve1_t1s_output
   # Register 136 — Heating curve 1 calculated T1S output flow temperature °C (Zone 1)
 
-- name: clivet_curve2_t1s_output
+- name: curve2_t1s_output
   address: 137
   slave: 1
   input_type: holding
@@ -97,11 +102,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_curve2_t1s_output
-  scan_interval: 30
+  scan_interval: *scan_interval
+  unique_id: curve2_t1s_output
   # Register 137 — Heating curve 2 calculated T1S output flow temperature °C (Zone 2)
 
-- name: clivet_water_flow
+- name: water_flow
   address: 138
   slave: 1
   input_type: holding
@@ -109,23 +114,23 @@
   scale: 0.01
   precision: 2
   unit_of_measurement: "m³/h"
-  unique_id: clivet_water_flow
-  scan_interval: 30
+  scan_interval: *scan_interval
+  unique_id: water_flow
   # Register 138 — Water flow rate m³/h; raw = actual × 100, scale = 0.01
   # GUESSWORK: scaling inferred from manual description; verify against actual unit readings
 
-- name: clivet_odu_current_limit_scheme
+- name: odu_current_limit_scheme
   address: 139
   slave: 1
   input_type: holding
   data_type: uint16
   scale: 1
   precision: 0
-  unique_id: clivet_odu_current_limit_scheme
-  scan_interval: 30
+  scan_interval: *scan_interval
+  unique_id: odu_current_limit_scheme
   # Register 139 — ODU current limit / frequency restriction scheme identifier
 
-- name: clivet_idu_capacity
+- name: idu_capacity
   address: 140
   slave: 1
   input_type: holding
@@ -134,12 +139,12 @@
   precision: 2
   unit_of_measurement: "kW"
   device_class: power
-  unique_id: clivet_idu_capacity
-  scan_interval: 30
+  scan_interval: *scan_interval
+  unique_id: idu_capacity
   # Register 140 — IDU operating capacity kW; raw = actual × 100, scale = 0.01
   # GUESSWORK: scaling inferred from manual description; verify against actual unit readings
 
-- name: clivet_t_solar
+- name: t_solar
   address: 141
   slave: 1
   input_type: holding
@@ -148,71 +153,71 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t_solar
-  scan_interval: 30
+  scan_interval: *scan_interval
+  unique_id: t_solar
   # Register 141 — T solar panel temperature °C (solar thermal kit only; may read 0 if not installed)
 
-- name: clivet_cascade_units_bitmask
+- name: cascade_units_bitmask
   address: 142
   slave: 1
   input_type: holding
   data_type: uint16
   scale: 1
   precision: 0
-  unique_id: clivet_cascade_units_bitmask
-  scan_interval: 30
+  scan_interval: *scan_interval
+  unique_id: cascade_units_bitmask
   # Register 142 — Cascade units online bitmask: BIT1–BIT15 = units 1–15 online/offline
   # (cascade / multi-unit installation only)
 
-- name: clivet_electrical_high_bits
+- name: electrical_high_bits
   address: 143
   slave: 1
   input_type: holding
   data_type: uint16
   scale: 1
   precision: 0
-  unique_id: clivet_electrical_high_bits
-  scan_interval: 30
+  scan_interval: *scan_interval
+  unique_id: electrical_high_bits
   # Register 143 — High 16 bits of total electrical energy consumption counter
   # See templates/08_combined_sensors.yaml for 32-bit combined value
 
-- name: clivet_electrical_low_bits
+- name: electrical_low_bits
   address: 144
   slave: 1
   input_type: holding
   data_type: uint16
   scale: 1
   precision: 0
-  unique_id: clivet_electrical_low_bits
-  scan_interval: 30
+  scan_interval: *scan_interval
+  unique_id: electrical_low_bits
   # Register 144 — Low 16 bits of total electrical energy consumption counter
   # See templates/08_combined_sensors.yaml for 32-bit combined value
 
-- name: clivet_heat_energy_high_bits
+- name: heat_energy_high_bits
   address: 145
   slave: 1
   input_type: holding
   data_type: uint16
   scale: 1
   precision: 0
-  unique_id: clivet_heat_energy_high_bits
-  scan_interval: 30
+  scan_interval: *scan_interval
+  unique_id: heat_energy_high_bits
   # Register 145 — High 16 bits of total heat energy produced counter
   # See templates/08_combined_sensors.yaml for 32-bit combined value
 
-- name: clivet_heat_energy_low_bits
+- name: heat_energy_low_bits
   address: 146
   slave: 1
   input_type: holding
   data_type: uint16
   scale: 1
   precision: 0
-  unique_id: clivet_heat_energy_low_bits
-  scan_interval: 30
+  scan_interval: *scan_interval
+  unique_id: heat_energy_low_bits
   # Register 146 — Low 16 bits of total heat energy produced counter
   # See templates/08_combined_sensors.yaml for 32-bit combined value
 
-- name: clivet_ahs_output
+- name: ahs_output
   address: 147
   slave: 1
   input_type: holding
@@ -221,6 +226,6 @@
   precision: 1
   unit_of_measurement: "kW"
   device_class: power
-  unique_id: clivet_ahs_output
-  scan_interval: 30
+  scan_interval: *scan_interval
+  unique_id: ahs_output
   # Register 147 — AHS (auxiliary heat source) output power kW; raw = actual × 10, scale = 0.1

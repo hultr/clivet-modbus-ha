@@ -1,46 +1,46 @@
 # Binary sensors extracted from register 1007 — IDU status bitmask 1
-# Source sensor: sensor.clivet_idu_status_1
+# Source sensor: sensor.idu_status_1
 
 - binary_sensor:
-    - name: "Clivet IDU Defrost Active"
-      unique_id: clivet_bit_reg1007_defrost
+    - name: "IDU Defrost Active"
+      unique_id: bit_reg1007_defrost
       # Register 1007, BIT0 — IDU-reported defrost cycle is active
-      state: "{{ (states('sensor.clivet_idu_status_1') | int(0)) | bitwise_and(1) != 0 }}"
+      state: "{{ (states('sensor.idu_status_1') | int(0)) | bitwise_and(1) != 0 }}"
       device_class: running
 
-    - name: "Clivet IDU Anti-Freeze Active"
-      unique_id: clivet_bit_reg1007_anti_freeze
+    - name: "IDU Anti-Freeze Active"
+      unique_id: bit_reg1007_anti_freeze
       # Register 1007, BIT1 — IDU anti-freeze protection is active
-      state: "{{ (states('sensor.clivet_idu_status_1') | int(0)) | bitwise_and(2) != 0 }}"
+      state: "{{ (states('sensor.idu_status_1') | int(0)) | bitwise_and(2) != 0 }}"
       device_class: safety
 
-    - name: "Clivet IDU Oil Return Active"
-      unique_id: clivet_bit_reg1007_oil_return
+    - name: "IDU Oil Return Active"
+      unique_id: bit_reg1007_oil_return
       # Register 1007, BIT2 — IDU-reported compressor oil return cycle is active
-      state: "{{ (states('sensor.clivet_idu_status_1') | int(0)) | bitwise_and(4) != 0 }}"
+      state: "{{ (states('sensor.idu_status_1') | int(0)) | bitwise_and(4) != 0 }}"
       device_class: running
 
-    - name: "Clivet IDU Status 1 Bit3 Reserved"
-      unique_id: clivet_bit_reg1007_bit3
+    - name: "IDU Status 1 Bit3 Reserved"
+      unique_id: bit_reg1007_bit3
       # Register 1007, BIT3 — Reserved (no documented function)
-      state: "{{ (states('sensor.clivet_idu_status_1') | int(0)) | bitwise_and(8) != 0 }}"
+      state: "{{ (states('sensor.idu_status_1') | int(0)) | bitwise_and(8) != 0 }}"
 
-    - name: "Clivet IDU Status 1 Bit4 Reserved"
-      unique_id: clivet_bit_reg1007_bit4
+    - name: "IDU Status 1 Bit4 Reserved"
+      unique_id: bit_reg1007_bit4
       # Register 1007, BIT4 — Reserved (no documented function)
-      state: "{{ (states('sensor.clivet_idu_status_1') | int(0)) | bitwise_and(16) != 0 }}"
+      state: "{{ (states('sensor.idu_status_1') | int(0)) | bitwise_and(16) != 0 }}"
 
-    - name: "Clivet IDU Status 1 Bit5 Reserved"
-      unique_id: clivet_bit_reg1007_bit5
+    - name: "IDU Status 1 Bit5 Reserved"
+      unique_id: bit_reg1007_bit5
       # Register 1007, BIT5 — Reserved (no documented function)
-      state: "{{ (states('sensor.clivet_idu_status_1') | int(0)) | bitwise_and(32) != 0 }}"
+      state: "{{ (states('sensor.idu_status_1') | int(0)) | bitwise_and(32) != 0 }}"
 
-    - name: "Clivet IDU Status 1 Bit6 Reserved"
-      unique_id: clivet_bit_reg1007_bit6
+    - name: "IDU Status 1 Bit6 Reserved"
+      unique_id: bit_reg1007_bit6
       # Register 1007, BIT6 — Reserved (no documented function)
-      state: "{{ (states('sensor.clivet_idu_status_1') | int(0)) | bitwise_and(64) != 0 }}"
+      state: "{{ (states('sensor.idu_status_1') | int(0)) | bitwise_and(64) != 0 }}"
 
-    - name: "Clivet IDU Status 1 Bit7 Reserved"
-      unique_id: clivet_bit_reg1007_bit7
+    - name: "IDU Status 1 Bit7 Reserved"
+      unique_id: bit_reg1007_bit7
       # Register 1007, BIT7 — Reserved (no documented function)
-      state: "{{ (states('sensor.clivet_idu_status_1') | int(0)) | bitwise_and(128) != 0 }}"
+      state: "{{ (states('sensor.idu_status_1') | int(0)) | bitwise_and(128) != 0 }}"

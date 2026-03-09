@@ -5,18 +5,23 @@
 #
 # scan_interval: 300 seconds (slow poll; these values rarely change)
 
-- name: clivet_unit_type_identifier
+# ─────────────────────────────────────────────────────────────────────────────
+# SCAN INTERVAL — edit the value below to change the poll rate for ALL sensors
+# in this file. (YAML anchor; referenced as *scan_interval throughout)
+# ─────────────────────────────────────────────────────────────────────────────
+
+- name: unit_type_identifier
   address: 200
   slave: 1
   input_type: holding
   data_type: uint16
   scale: 1
   precision: 0
-  unique_id: clivet_unit_type_identifier
-  scan_interval: 300
+  scan_interval: &scan_interval 300   # ← change this value to repoll all sensors
+  unique_id: unit_type_identifier
   # Register 200 — Unit type identifier (complex packed value encoding model/variant)
 
-- name: clivet_t1s_cool_upper_limit
+- name: t1s_cool_upper_limit
   address: 201
   slave: 1
   input_type: holding
@@ -25,11 +30,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t1s_cool_upper_limit
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t1s_cool_upper_limit
   # Register 201 — T1S cooling setpoint upper limit (packed: low byte=zone1, high byte=zone2)
 
-- name: clivet_t1s_cool_lower_limit
+- name: t1s_cool_lower_limit
   address: 202
   slave: 1
   input_type: holding
@@ -38,11 +43,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t1s_cool_lower_limit
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t1s_cool_lower_limit
   # Register 202 — T1S cooling setpoint lower limit (packed: low byte=zone1, high byte=zone2)
 
-- name: clivet_t1s_heat_upper_limit
+- name: t1s_heat_upper_limit
   address: 203
   slave: 1
   input_type: holding
@@ -51,11 +56,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t1s_heat_upper_limit
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t1s_heat_upper_limit
   # Register 203 — T1S heating setpoint upper limit (packed: low byte=zone1, high byte=zone2)
 
-- name: clivet_t1s_heat_lower_limit
+- name: t1s_heat_lower_limit
   address: 204
   slave: 1
   input_type: holding
@@ -64,11 +69,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t1s_heat_lower_limit
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t1s_heat_lower_limit
   # Register 204 — T1S heating setpoint lower limit (packed: low byte=zone1, high byte=zone2)
 
-- name: clivet_t5_setpoint_upper_limit
+- name: t5_setpoint_upper_limit
   address: 205
   slave: 1
   input_type: holding
@@ -77,11 +82,11 @@
   precision: 1
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t5_setpoint_upper_limit
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t5_setpoint_upper_limit
   # Register 205 — T5 DHW setpoint upper limit; read = real × 2, scale = 0.5
 
-- name: clivet_t5_setpoint_lower_limit
+- name: t5_setpoint_lower_limit
   address: 206
   slave: 1
   input_type: holding
@@ -90,11 +95,11 @@
   precision: 1
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t5_setpoint_lower_limit
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t5_setpoint_lower_limit
   # Register 206 — T5 DHW setpoint lower limit; read = real × 2, scale = 0.5
 
-- name: clivet_dhw_upper_limit
+- name: dhw_upper_limit
   address: 207
   slave: 1
   input_type: holding
@@ -103,11 +108,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_dhw_upper_limit
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: dhw_upper_limit
   # Register 207 — DHW setting upper limit °C
 
-- name: clivet_dhw_lower_limit
+- name: dhw_lower_limit
   address: 208
   slave: 1
   input_type: holding
@@ -116,11 +121,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_dhw_lower_limit
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: dhw_lower_limit
   # Register 208 — DHW setting lower limit °C
 
-- name: clivet_recirc_pump_op_time
+- name: recirc_pump_op_time
   address: 209
   slave: 1
   input_type: holding
@@ -128,19 +133,19 @@
   scale: 1
   precision: 0
   unit_of_measurement: "min"
-  unique_id: clivet_recirc_pump_op_time
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: recirc_pump_op_time
   # Register 209 — Recirculation pump operating time 5–120 minutes
 
-- name: clivet_param_setting_1
+- name: param_setting_1
   address: 210
   slave: 1
   input_type: holding
   data_type: uint16
   scale: 1
   precision: 0
-  unique_id: clivet_param_setting_1
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: param_setting_1
   # Register 210 — Parameter setting 1 bitmask
   # BIT0=DHW/space priority, BIT1=dual room thermostat, BIT2=room thermostat mode,
   # BIT3=support room thermostat, BIT4=support Ta sensor, BIT5=pump mute,
@@ -149,15 +154,15 @@
   # BIT13=sterilization support, BIT14=TBH installed RO, BIT15=DHW enable
   # Raw bitmask — individual bit meanings listed above
 
-- name: clivet_param_setting_2
+- name: param_setting_2
   address: 211
   slave: 1
   input_type: holding
   data_type: uint16
   scale: 1
   precision: 0
-  unique_id: clivet_param_setting_2
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: param_setting_2
   # Register 211 — Parameter setting 2 bitmask
   # BIT0=IBH position buffer/pipeline, BIT1=Tbt sensor enable, BIT2=Ta sensor position,
   # BIT3=dual zone enable, BIT4=zone2 T1S heat range, BIT5=zone2 T1S cool range,
@@ -166,7 +171,7 @@
   # BIT14=dry contact AHS, BIT15=dual water tank
   # Raw bitmask — individual bit meanings listed above
 
-- name: clivet_dt5_on_hysteresis
+- name: dt5_on_hysteresis
   address: 212
   slave: 1
   input_type: holding
@@ -175,11 +180,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_dt5_on_hysteresis
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: dt5_on_hysteresis
   # Register 212 — dT5_On DHW hysteresis ON threshold °C
 
-- name: clivet_dt1s5_differential
+- name: dt1s5_differential
   address: 213
   slave: 1
   input_type: holding
@@ -187,11 +192,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "°C"
-  unique_id: clivet_dt1s5_differential
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: dt1s5_differential
   # Register 213 — dT1S5 temperature differential between T1S and T5 °C
 
-- name: clivet_dhw_interval
+- name: dhw_interval
   address: 214
   slave: 1
   input_type: holding
@@ -199,12 +204,12 @@
   scale: 1
   precision: 0
   unit_of_measurement: "min"
-  unique_id: clivet_dhw_interval
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: dhw_interval
   # Register 214 — T_Interval_DHW DHW operating interval minutes
   # Note: manual has a printing error; likely 5–60 minutes
 
-- name: clivet_t4dhwmax
+- name: t4dhwmax
   address: 215
   slave: 1
   input_type: holding
@@ -213,11 +218,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t4dhwmax
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t4dhwmax
   # Register 215 — T4DHWmax maximum outdoor temp for DHW heat pump operation °C (35–43°C)
 
-- name: clivet_t4dhwmin
+- name: t4dhwmin
   address: 216
   slave: 1
   input_type: holding
@@ -226,11 +231,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t4dhwmin
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t4dhwmin
   # Register 216 — T4DHWmin minimum outdoor temp for DHW heat pump operation °C
 
-- name: clivet_tbh_delay
+- name: tbh_delay
   address: 217
   slave: 1
   input_type: holding
@@ -238,11 +243,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "min"
-  unique_id: clivet_tbh_delay
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: tbh_delay
   # Register 217 — t_TBH_delay TBH (tank backup heater) activation delay 0–240 minutes
 
-- name: clivet_dt5s_tbh_off
+- name: dt5s_tbh_off
   address: 218
   slave: 1
   input_type: holding
@@ -250,11 +255,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "°C"
-  unique_id: clivet_dt5s_tbh_off
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: dt5s_tbh_off
   # Register 218 — dT5S_TBH_off TBH shut-off temperature differential °C (0–10°C)
 
-- name: clivet_t4_tbh_on
+- name: t4_tbh_on
   address: 219
   slave: 1
   input_type: holding
@@ -263,11 +268,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t4_tbh_on
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t4_tbh_on
   # Register 219 — T4_TBH_on outdoor temperature threshold for TBH activation °C
 
-- name: clivet_t5s_sterilization_target
+- name: t5s_sterilization_target
   address: 220
   slave: 1
   input_type: holding
@@ -276,11 +281,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t5s_sterilization_target
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t5s_sterilization_target
   # Register 220 — T5s_DI sterilization target temperature °C (60–70°C)
 
-- name: clivet_sterilization_hold_duration
+- name: sterilization_hold_duration
   address: 222
   slave: 1
   input_type: holding
@@ -288,12 +293,12 @@
   scale: 1
   precision: 0
   unit_of_measurement: "min"
-  unique_id: clivet_sterilization_hold_duration
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: sterilization_hold_duration
   # Register 222 — t_DI_hightemp sterilization high-temperature hold duration 5–60 minutes
   # Note: register 221 is not documented and is intentionally skipped
 
-- name: clivet_cooling_restart_delay
+- name: cooling_restart_delay
   address: 223
   slave: 1
   input_type: holding
@@ -301,11 +306,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "min"
-  unique_id: clivet_cooling_restart_delay
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: cooling_restart_delay
   # Register 223 — t_interval_C cooling compressor restart delay minutes
 
-- name: clivet_dt1sc_cooling_hysteresis
+- name: dt1sc_cooling_hysteresis
   address: 224
   slave: 1
   input_type: holding
@@ -313,11 +318,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "°C"
-  unique_id: clivet_dt1sc_cooling_hysteresis
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: dt1sc_cooling_hysteresis
   # Register 224 — dT1SC cooling T1S hysteresis °C (2–10°C)
 
-- name: clivet_dt5c_cooling_hysteresis
+- name: dt5c_cooling_hysteresis
   address: 225
   slave: 1
   input_type: holding
@@ -325,11 +330,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "°C"
-  unique_id: clivet_dt5c_cooling_hysteresis
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: dt5c_cooling_hysteresis
   # Register 225 — dT5C cooling T5 hysteresis °C (1–10°C)
 
-- name: clivet_t4cmax
+- name: t4cmax
   address: 226
   slave: 1
   input_type: holding
@@ -338,11 +343,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t4cmax
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t4cmax
   # Register 226 — T4cmax maximum outdoor temp for cooling operation °C (35–52°C)
 
-- name: clivet_t4cmin
+- name: t4cmin
   address: 227
   slave: 1
   input_type: holding
@@ -351,11 +356,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t4cmin
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t4cmin
   # Register 227 — T4cmin minimum outdoor temp for cooling operation °C (-5 to 25°C)
 
-- name: clivet_heating_restart_delay
+- name: heating_restart_delay
   address: 228
   slave: 1
   input_type: holding
@@ -363,11 +368,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "min"
-  unique_id: clivet_heating_restart_delay
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: heating_restart_delay
   # Register 228 — t_interval_H heating compressor restart delay minutes
 
-- name: clivet_dt1sh_heating_hysteresis
+- name: dt1sh_heating_hysteresis
   address: 229
   slave: 1
   input_type: holding
@@ -375,11 +380,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "°C"
-  unique_id: clivet_dt1sh_heating_hysteresis
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: dt1sh_heating_hysteresis
   # Register 229 — dT1SH heating T1S hysteresis °C
 
-- name: clivet_dtsh_room_hysteresis
+- name: dtsh_room_hysteresis
   address: 230
   slave: 1
   input_type: holding
@@ -387,11 +392,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "°C"
-  unique_id: clivet_dtsh_room_hysteresis
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: dtsh_room_hysteresis
   # Register 230 — dTSH heating room temperature hysteresis °C (1–10°C)
 
-- name: clivet_t4hmax
+- name: t4hmax
   address: 231
   slave: 1
   input_type: holding
@@ -400,11 +405,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t4hmax
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t4hmax
   # Register 231 — T4hmax maximum outdoor temp for heating operation °C (20–35°C)
 
-- name: clivet_t4hmin
+- name: t4hmin
   address: 232
   slave: 1
   input_type: holding
@@ -413,11 +418,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t4hmin
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t4hmin
   # Register 232 — T4hmin minimum outdoor temp for heating operation °C
 
-- name: clivet_t4_ibh_on
+- name: t4_ibh_on
   address: 233
   slave: 1
   input_type: holding
@@ -426,11 +431,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t4_ibh_on
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t4_ibh_on
   # Register 233 — T4_IBH_on outdoor temperature for IBH activation °C (-15 to 10°C)
 
-- name: clivet_dt1_ibh_on
+- name: dt1_ibh_on
   address: 234
   slave: 1
   input_type: holding
@@ -438,11 +443,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "°C"
-  unique_id: clivet_dt1_ibh_on
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: dt1_ibh_on
   # Register 234 — dT1_IBH_on IBH activation temperature hysteresis °C
 
-- name: clivet_ibh_delay
+- name: ibh_delay
   address: 235
   slave: 1
   input_type: holding
@@ -450,11 +455,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "min"
-  unique_id: clivet_ibh_delay
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: ibh_delay
   # Register 235 — t_IBH_delay IBH (inline backup heater) activation delay 15–120 minutes
 
-- name: clivet_ibh12_delay
+- name: ibh12_delay
   address: 236
   slave: 1
   input_type: holding
@@ -462,11 +467,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "min"
-  unique_id: clivet_ibh12_delay
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: ibh12_delay
   # Register 236 — t_IBH12_delay (reserved; purpose not documented)
 
-- name: clivet_t4_ahs_on
+- name: t4_ahs_on
   address: 237
   slave: 1
   input_type: holding
@@ -475,11 +480,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t4_ahs_on
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t4_ahs_on
   # Register 237 — T4_AHS_on outdoor temperature for AHS (auxiliary heat source) activation °C
 
-- name: clivet_dt1_ahs_on
+- name: dt1_ahs_on
   address: 238
   slave: 1
   input_type: holding
@@ -487,11 +492,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "°C"
-  unique_id: clivet_dt1_ahs_on
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: dt1_ahs_on
   # Register 238 — dT1_AHS_on AHS activation temperature differential °C
 
-- name: clivet_dt1_ahs_off
+- name: dt1_ahs_off
   address: 239
   slave: 1
   input_type: holding
@@ -499,11 +504,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "°C"
-  unique_id: clivet_dt1_ahs_off
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: dt1_ahs_off
   # Register 239 — dT1_AHS_off (reserved; AHS deactivation differential)
 
-- name: clivet_ahs_delay
+- name: ahs_delay
   address: 240
   slave: 1
   input_type: holding
@@ -511,11 +516,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "min"
-  unique_id: clivet_ahs_delay
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: ahs_delay
   # Register 240 — t_AHS_delay compressor run time before AHS starts 5–120 minutes
 
-- name: clivet_dhwhp_max_cycle
+- name: dhwhp_max_cycle
   address: 241
   slave: 1
   input_type: holding
@@ -523,11 +528,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "min"
-  unique_id: clivet_dhwhp_max_cycle
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: dhwhp_max_cycle
   # Register 241 — t_DHWHP_max maximum DHW HP cycle duration 10–600 minutes
 
-- name: clivet_dhwhp_restrict
+- name: dhwhp_restrict
   address: 242
   slave: 1
   input_type: holding
@@ -535,11 +540,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "min"
-  unique_id: clivet_dhwhp_restrict
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: dhwhp_restrict
   # Register 242 — t_DHWHP_restrict maximum heating/cooling run time 10–600 minutes
 
-- name: clivet_t4autocmin
+- name: t4autocmin
   address: 243
   slave: 1
   input_type: holding
@@ -548,11 +553,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t4autocmin
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t4autocmin
   # Register 243 — T4autocmin auto mode minimum outdoor temp for cooling °C (20–29°C)
 
-- name: clivet_t4autohmax
+- name: t4autohmax
   address: 244
   slave: 1
   input_type: holding
@@ -561,11 +566,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t4autohmax
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t4autohmax
   # Register 244 — T4autohmax auto mode maximum outdoor temp for heating °C (10–17°C)
 
-- name: clivet_vacation_heating_setpoint
+- name: vacation_heating_setpoint
   address: 245
   slave: 1
   input_type: holding
@@ -574,11 +579,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_vacation_heating_setpoint
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: vacation_heating_setpoint
   # Register 245 — T1S_H.A_H vacation (Holiday Away) heating flow temperature setpoint °C (20–25°C)
 
-- name: clivet_vacation_dhw_setpoint
+- name: vacation_dhw_setpoint
   address: 246
   slave: 1
   input_type: holding
@@ -587,11 +592,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_vacation_dhw_setpoint
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: vacation_dhw_setpoint
   # Register 246 — T5S_H.A_DHW vacation DHW tank temperature setpoint °C (20–25°C)
 
-- name: clivet_compressor_start_pct
+- name: compressor_start_pct
   address: 247
   slave: 1
   input_type: holding
@@ -599,22 +604,22 @@
   scale: 1
   precision: 0
   unit_of_measurement: "%"
-  unique_id: clivet_compressor_start_pct
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: compressor_start_pct
   # Register 247 — Start percentage: compressor start power 10–100 (step 10)
 
-- name: clivet_adjustment_time
+- name: adjustment_time
   address: 248
   slave: 1
   input_type: holding
   data_type: uint16
   scale: 1
   precision: 0
-  unique_id: clivet_adjustment_time
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: adjustment_time
   # Register 248 — Adjustment time 1–60
 
-- name: clivet_dtbt2_differential
+- name: dtbt2_differential
   address: 249
   slave: 1
   input_type: holding
@@ -622,11 +627,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "°C"
-  unique_id: clivet_dtbt2_differential
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: dtbt2_differential
   # Register 249 — dTbt2 buffer tank 2 differential 0–50
 
-- name: clivet_ibh1_power
+- name: ibh1_power
   address: 250
   slave: 1
   input_type: holding
@@ -634,11 +639,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "×100W"
-  unique_id: clivet_ibh1_power
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: ibh1_power
   # Register 250 — IBH1 power rating 0–200 (unit = 100W; value × 100 = watts)
 
-- name: clivet_ibh2_power
+- name: ibh2_power
   address: 251
   slave: 1
   input_type: holding
@@ -646,11 +651,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "×100W"
-  unique_id: clivet_ibh2_power
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: ibh2_power
   # Register 251 — IBH2 power rating 0–200 (unit = 100W)
 
-- name: clivet_tbh_power
+- name: tbh_power
   address: 252
   slave: 1
   input_type: holding
@@ -658,14 +663,14 @@
   scale: 1
   precision: 0
   unit_of_measurement: "×100W"
-  unique_id: clivet_tbh_power
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: tbh_power
   # Register 252 — TBH power rating 0–200 (unit = 100W)
 
 # Registers 253–254 (Comfort parameters) are reserved and querying may cause errors.
 # They are intentionally excluded from this configuration.
 
-- name: clivet_floor_dry_heat_days
+- name: floor_dry_heat_days
   address: 255
   slave: 1
   input_type: holding
@@ -673,11 +678,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "days"
-  unique_id: clivet_floor_dry_heat_days
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: floor_dry_heat_days
   # Register 255 — t_DRYUP floor drying heating phase duration 4–15 days
 
-- name: clivet_floor_dry_peak_days
+- name: floor_dry_peak_days
   address: 256
   slave: 1
   input_type: holding
@@ -685,11 +690,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "days"
-  unique_id: clivet_floor_dry_peak_days
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: floor_dry_peak_days
   # Register 256 — t_HIGHPEAK floor drying peak temperature hold duration 3–7 days
 
-- name: clivet_floor_dry_cool_days
+- name: floor_dry_cool_days
   address: 257
   slave: 1
   input_type: holding
@@ -697,11 +702,11 @@
   scale: 1
   precision: 0
   unit_of_measurement: "days"
-  unique_id: clivet_floor_dry_cool_days
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: floor_dry_cool_days
   # Register 257 — t_DRYD floor drying cooling phase duration 4–15 days
 
-- name: clivet_floor_dry_peak_temp
+- name: floor_dry_peak_temp
   address: 258
   slave: 1
   input_type: holding
@@ -710,11 +715,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_floor_dry_peak_temp
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: floor_dry_peak_temp
   # Register 258 — T_DRYPEAK maximum floor drying temperature °C (30–55°C)
 
-- name: clivet_first_floor_heat_hours
+- name: first_floor_heat_hours
   address: 259
   slave: 1
   input_type: holding
@@ -723,11 +728,11 @@
   precision: 0
   unit_of_measurement: "h"
   device_class: duration
-  unique_id: clivet_first_floor_heat_hours
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: first_floor_heat_hours
   # Register 259 — t_firstFH first floor heating run duration 48–96 hours
 
-- name: clivet_t1s_first_warm
+- name: t1s_first_warm
   address: 260
   slave: 1
   input_type: holding
@@ -736,11 +741,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t1s_first_warm
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t1s_first_warm
   # Register 260 — T1S first warm floor heating initial flow temperature °C (25–35°C)
 
-- name: clivet_t1setc1_cool_curve_flow1
+- name: t1setc1_cool_curve_flow1
   address: 261
   slave: 1
   input_type: holding
@@ -749,11 +754,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t1setc1_cool_curve_flow1
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t1setc1_cool_curve_flow1
   # Register 261 — T1SetC1 cooling curve: flow temperature at outdoor point 1 °C (5–25°C)
 
-- name: clivet_t1setc2_cool_curve_flow2
+- name: t1setc2_cool_curve_flow2
   address: 262
   slave: 1
   input_type: holding
@@ -762,11 +767,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t1setc2_cool_curve_flow2
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t1setc2_cool_curve_flow2
   # Register 262 — T1SetC2 cooling curve: flow temperature at outdoor point 2 °C (5–25°C)
 
-- name: clivet_t4c1_cool_curve_outdoor1
+- name: t4c1_cool_curve_outdoor1
   address: 263
   slave: 1
   input_type: holding
@@ -775,11 +780,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t4c1_cool_curve_outdoor1
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t4c1_cool_curve_outdoor1
   # Register 263 — T4C1 cooling curve: outdoor temperature point 1 °C (-5 to 46°C)
 
-- name: clivet_t4c2_cool_curve_outdoor2
+- name: t4c2_cool_curve_outdoor2
   address: 264
   slave: 1
   input_type: holding
@@ -788,11 +793,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t4c2_cool_curve_outdoor2
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t4c2_cool_curve_outdoor2
   # Register 264 — T4C2 cooling curve: outdoor temperature point 2 °C (-5 to 46°C)
 
-- name: clivet_t1seth1_heat_curve_flow1
+- name: t1seth1_heat_curve_flow1
   address: 265
   slave: 1
   input_type: holding
@@ -801,11 +806,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t1seth1_heat_curve_flow1
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t1seth1_heat_curve_flow1
   # Register 265 — T1SetH1 heating curve: flow temperature at outdoor point 1 °C (25–60°C)
 
-- name: clivet_t1seth2_heat_curve_flow2
+- name: t1seth2_heat_curve_flow2
   address: 266
   slave: 1
   input_type: holding
@@ -814,12 +819,12 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t1seth2_heat_curve_flow2
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t1seth2_heat_curve_flow2
   # Register 266 — T1SetH2 heating curve: flow temperature at outdoor point 2 °C (25–60°C)
   # Note: manual incorrectly labels this T1SetH1
 
-- name: clivet_t4h1_heat_curve_outdoor1
+- name: t4h1_heat_curve_outdoor1
   address: 267
   slave: 1
   input_type: holding
@@ -828,11 +833,11 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t4h1_heat_curve_outdoor1
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t4h1_heat_curve_outdoor1
   # Register 267 — T4H1 heating curve: outdoor temperature point 1 °C (-25 to 35°C)
 
-- name: clivet_t4h2_heat_curve_outdoor2
+- name: t4h2_heat_curve_outdoor2
   address: 268
   slave: 1
   input_type: holding
@@ -841,33 +846,33 @@
   precision: 0
   unit_of_measurement: "°C"
   device_class: temperature
-  unique_id: clivet_t4h2_heat_curve_outdoor2
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: t4h2_heat_curve_outdoor2
   # Register 268 — T4H2 heating curve: outdoor temperature point 2 °C (-25 to 35°C)
 
-- name: clivet_hb_freq_limit_scheme
+- name: hb_freq_limit_scheme
   address: 269
   slave: 1
   input_type: holding
   data_type: uint16
   scale: 1
   precision: 0
-  unique_id: clivet_hb_freq_limit_scheme
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: hb_freq_limit_scheme
   # Register 269 — HB frequency limiting scheme for cooling: 0=none, 1–8=scheme number
 
-- name: clivet_lb_fresh_air_heat_time
+- name: lb_fresh_air_heat_time
   address: 270
   slave: 1
   input_type: holding
   data_type: uint16
   scale: 0.5
   precision: 1
-  unique_id: clivet_lb_fresh_air_heat_time
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: lb_fresh_air_heat_time
   # Register 270 — LB fresh air heating time; actual = raw × 0.5, scale = 0.5 (sending = actual × 2)
 
-- name: clivet_pump_delay
+- name: pump_delay
   address: 271
   slave: 1
   input_type: holding
@@ -875,19 +880,19 @@
   scale: 0.5
   precision: 1
   unit_of_measurement: "min"
-  unique_id: clivet_pump_delay
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: pump_delay
   # Register 271 — T_PUMPI_DELAY pump delay; actual = raw × 0.5, scale = 0.5 (sending = actual × 2)
 
-- name: clivet_emission_type
+- name: emission_type
   address: 272
   slave: 1
   input_type: holding
   data_type: uint16
   scale: 1
   precision: 0
-  unique_id: clivet_emission_type
-  scan_interval: 300
+  scan_interval: *scan_interval
+  unique_id: emission_type
   # Register 272 — EMISSION TYPE bitmask
   # Bit12–15=zone2 cooling emission type, Bit8–11=zone1 cooling emission type,
   # Bit4–7=zone2 heating emission type, Bit0–3=zone1 heating emission type

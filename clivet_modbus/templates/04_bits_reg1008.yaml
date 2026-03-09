@@ -1,46 +1,46 @@
 # Binary sensors extracted from register 1008 — IDU status bitmask 2
-# Source sensor: sensor.clivet_idu_status_2
+# Source sensor: sensor.idu_status_2
 
 - binary_sensor:
-    - name: "Clivet IDU Cooling Active"
-      unique_id: clivet_bit_reg1008_cool_active
+    - name: "IDU Cooling Active"
+      unique_id: bit_reg1008_cool_active
       # Register 1008, BIT0 — IDU cooling mode is currently active
-      state: "{{ (states('sensor.clivet_idu_status_2') | int(0)) | bitwise_and(1) != 0 }}"
+      state: "{{ (states('sensor.idu_status_2') | int(0)) | bitwise_and(1) != 0 }}"
       device_class: cold
 
-    - name: "Clivet IDU Heating Active"
-      unique_id: clivet_bit_reg1008_heat_active
+    - name: "IDU Heating Active"
+      unique_id: bit_reg1008_heat_active
       # Register 1008, BIT1 — IDU heating mode is currently active
-      state: "{{ (states('sensor.clivet_idu_status_2') | int(0)) | bitwise_and(2) != 0 }}"
+      state: "{{ (states('sensor.idu_status_2') | int(0)) | bitwise_and(2) != 0 }}"
       device_class: heat
 
-    - name: "Clivet IDU DHW Active"
-      unique_id: clivet_bit_reg1008_dhw_active
+    - name: "IDU DHW Active"
+      unique_id: bit_reg1008_dhw_active
       # Register 1008, BIT2 — DHW (domestic hot water) heating is currently active
-      state: "{{ (states('sensor.clivet_idu_status_2') | int(0)) | bitwise_and(4) != 0 }}"
+      state: "{{ (states('sensor.idu_status_2') | int(0)) | bitwise_and(4) != 0 }}"
       device_class: running
 
-    - name: "Clivet IBH Installed"
-      unique_id: clivet_bit_reg1008_ibh_installed
+    - name: "IBH Installed"
+      unique_id: bit_reg1008_ibh_installed
       # Register 1008, BIT3 — Inline backup heater (IBH) is installed and detected
-      state: "{{ (states('sensor.clivet_idu_status_2') | int(0)) | bitwise_and(8) != 0 }}"
+      state: "{{ (states('sensor.idu_status_2') | int(0)) | bitwise_and(8) != 0 }}"
 
-    - name: "Clivet T1 Sensor Installed"
-      unique_id: clivet_bit_reg1008_t1_sensor
+    - name: "T1 Sensor Installed"
+      unique_id: bit_reg1008_t1_sensor
       # Register 1008, BIT4 — T1 water outlet temperature sensor is installed
-      state: "{{ (states('sensor.clivet_idu_status_2') | int(0)) | bitwise_and(16) != 0 }}"
+      state: "{{ (states('sensor.idu_status_2') | int(0)) | bitwise_and(16) != 0 }}"
 
-    - name: "Clivet IDU Status 2 Bit5 Reserved"
-      unique_id: clivet_bit_reg1008_bit5
+    - name: "IDU Status 2 Bit5 Reserved"
+      unique_id: bit_reg1008_bit5
       # Register 1008, BIT5 — Reserved (no documented function)
-      state: "{{ (states('sensor.clivet_idu_status_2') | int(0)) | bitwise_and(32) != 0 }}"
+      state: "{{ (states('sensor.idu_status_2') | int(0)) | bitwise_and(32) != 0 }}"
 
-    - name: "Clivet IDU Status 2 Bit6 Reserved"
-      unique_id: clivet_bit_reg1008_bit6
+    - name: "IDU Status 2 Bit6 Reserved"
+      unique_id: bit_reg1008_bit6
       # Register 1008, BIT6 — Reserved (no documented function)
-      state: "{{ (states('sensor.clivet_idu_status_2') | int(0)) | bitwise_and(64) != 0 }}"
+      state: "{{ (states('sensor.idu_status_2') | int(0)) | bitwise_and(64) != 0 }}"
 
-    - name: "Clivet IDU Status 2 Bit7 Reserved"
-      unique_id: clivet_bit_reg1008_bit7
+    - name: "IDU Status 2 Bit7 Reserved"
+      unique_id: bit_reg1008_bit7
       # Register 1008, BIT7 — Reserved (no documented function)
-      state: "{{ (states('sensor.clivet_idu_status_2') | int(0)) | bitwise_and(128) != 0 }}"
+      state: "{{ (states('sensor.idu_status_2') | int(0)) | bitwise_and(128) != 0 }}"
