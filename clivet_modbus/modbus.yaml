@@ -8,7 +8,7 @@
 #   clivet_host: 192.168.20.113   # <-- default IP, adjust to your installation
 #
 # To exclude technician registers (200–272), remove or rename:
-#   clivet_modbus/sensors/08_tech.yaml
+#   clivet_modbus/sensors/_08_tech.yaml
 
 - name: clivet_hp
   type: tcp

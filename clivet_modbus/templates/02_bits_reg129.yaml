@@ -20,7 +20,7 @@
       state: "{{ (states('sensor.hp_load_output_bits') | int(0)) | bitwise_and(4) != 0 }}"
       device_class: running
 
-    - name: "HP Water Pump PUMP_I Running"
+    - name: "HP Water Pump Running"
       unique_id: bit_reg129_pump_i
       # Register 129, BIT3 — Primary hydronic water pump (PUMP_I) is running
       state: "{{ (states('sensor.hp_load_output_bits') | int(0)) | bitwise_and(8) != 0 }}"
