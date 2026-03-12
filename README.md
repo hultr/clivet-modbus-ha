@@ -19,9 +19,10 @@ You "install" it by copying files into your HA config directory and adding `!inc
 
 ```text
 clivet_modbus/
+	package.yaml                # HA package entry point (modbus + templates)
 	modbus.yaml                 # Modbus TCP hub and sensor includes
 	sensors/                    # Raw register sensors grouped by topic
-	templates/                  # Decoded bitmasks, switches, derived sensors
+	templates/                  # Decoded bitmasks, switches, selects, derived sensors
 	panel.yaml                  # Lovelace picture-elements panel
 	panel_pictures/             # PNG assets used by panel.yaml
 	registers.md                # Register documentation and notes
@@ -47,12 +48,17 @@ Notes:
 clivet_host: 192.168.20.20
 ```
 
-3. In `configuration.yaml`, add:
+3. In `configuration.yaml`, add the package under the `homeassistant:` key:
 
 ```yaml
-modbus: !include clivet_modbus/modbus.yaml
-template: !include_dir_merge_list clivet_modbus/templates/
+homeassistant:
+  packages:
+    clivet_hp: !include clivet_modbus/package.yaml
 ```
+
+> **Why a package?** `modbus:` and `template:` can each only appear once as top-level keys in
+> `configuration.yaml`. Using a package lets HA merge them automatically, so they coexist cleanly
+> with any other integrations or template files you already have.
 
 4. Ensure `clivet_modbus/modbus.yaml` hub name remains `clivet_hp` (template switches write to that hub).
 5. Restart Home Assistant.
@@ -124,5 +130,6 @@ Derived values are in `templates/08_combined_sensors.yaml`, such as:
 	- Confirm images exist under `/config/www/heat_pump_viz/`.
 	- Confirm paths are reachable as `/local/heat_pump_viz/...`.
 - Missing template entities:
-	- Confirm `template: !include_dir_merge_list clivet_modbus/templates/` is present.
+	- Confirm the `packages:` block is present under `homeassistant:` in `configuration.yaml`.
+	- Confirm `clivet_modbus/package.yaml` exists and contains both `modbus:` and `template:` includes.
 

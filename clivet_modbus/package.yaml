@@ -1,0 +1,12 @@
+# Clivet Sphera EVO 2.0 — Home Assistant Package
+#
+# USAGE in configuration.yaml:
+#   homeassistant:
+#     packages:
+#       clivet_hp: !include clivet_modbus/package.yaml
+#
+# Using a package lets HA merge template: and modbus: alongside any other
+# packages or top-level keys you already have — no conflicts.
+
+modbus: !include modbus.yaml
+template: !include_dir_merge_list templates/
