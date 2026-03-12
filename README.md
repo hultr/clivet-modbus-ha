@@ -44,7 +44,7 @@ Notes:
 2. Add your heat pump host to `secrets.yaml`:
 
 ```yaml
-clivet_host: 192.168.20.113
+clivet_host: 192.168.20.20
 ```
 
 3. In `configuration.yaml`, add:
