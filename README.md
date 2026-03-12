@@ -29,9 +29,7 @@ from-configurations.yml       # Legacy single-file export (reference only)
 ```
 
 Notes:
-
-- `from-configurations.yml` is legacy/reference material and is not used by the split config.
-- Technician registers are in `clivet_modbus/sensors/_08_tech.yaml` and can be disabled by renaming/removing that file.
+- Technician registers are excluded by default via `clivet_modbus/sensors/08_tech.yaml.disabled`.
 
 ## Prerequisites
 
@@ -61,7 +59,7 @@ template: !include_dir_merge_list clivet_modbus/templates/
 
 Optional:
 
-- To disable password-protected technician registers (200-272), remove or rename `clivet_modbus/sensors/_08_tech.yaml`.
+- To enable password-protected technician registers (200-272), rename `clivet_modbus/sensors/08_tech.yaml.disabled` to `clivet_modbus/sensors/08_tech.yaml`.
 
 ## Lovelace Panel Setup
 
@@ -127,11 +125,4 @@ Derived values are in `templates/08_combined_sensors.yaml`, such as:
 	- Confirm paths are reachable as `/local/heat_pump_viz/...`.
 - Missing template entities:
 	- Confirm `template: !include_dir_merge_list clivet_modbus/templates/` is present.
-
-## Consistency Fixes Included
-
-This repository has been cleaned up for two concrete inconsistencies:
-
-- `clivet_modbus/modbus.yaml` now references the actual technician file name (`_08_tech.yaml`).
-- `clivet_modbus/panel.yaml` now points to the existing entity `sensor.hp_curve1_t1s_output`.
 

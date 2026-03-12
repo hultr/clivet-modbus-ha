@@ -1,0 +1,74 @@
+# Template selects for register 6 — weather compensation curve selection
+#
+# Register 6 is a packed 16-bit value:
+#   bits 0–7  (low byte)  = Zone 1 curve, values 1–9
+#   bits 8–15 (high byte) = Zone 2 curve, values 1–9
+#
+# Source sensor: sensor.hp_curve_selection
+#
+# Read-modify-write pattern: selecting a curve for one zone preserves the other.
+#   Zone 1 extract:  raw & 0x00FF         (mask = 255)
+#   Zone 2 extract:  (raw // 256) & 0xFF  (mask = 255, shift = divide by 256)
+#   Zone 1 write:    (raw & 0xFF00) | new_curve           (keep_hi = 65280)
+#   Zone 2 write:    (raw & 0x00FF) | (new_curve * 256)   (keep_lo = 255)
+#
+# optimistic: true — UI updates immediately without waiting for next Modbus poll
+
+- select:
+    - name: "HP Zone 1 Curve"
+      unique_id: select_curve_zone1
+      # Register 6, low byte (bits 0–7) — Zone 1 weather compensation curve, 1–9
+      optimistic: true
+      options:
+        - "Curve 1"
+        - "Curve 2"
+        - "Curve 3"
+        - "Curve 4"
+        - "Curve 5"
+        - "Curve 6"
+        - "Curve 7"
+        - "Curve 8"
+        - "Curve 9"
+      state: >-
+        {% set curve = states('sensor.hp_curve_selection') | int(0) | bitwise_and(255) %}
+        {{ 'Curve ' ~ (curve if 1 <= curve <= 9 else 1) }}
+      select_option:
+        action: modbus.write_register
+        data:
+          hub: clivet_hp
+          unit: 1
+          address: 6
+          value: >-
+            {% set raw = states('sensor.hp_curve_selection') | int(0) %}
+            {% set zone2_hi = raw | bitwise_and(65280) %}
+            {% set new_curve = option.split(' ')[1] | int(1) %}
+            {{ zone2_hi | bitwise_or(new_curve) }}
+
+    - name: "HP Zone 2 Curve"
+      unique_id: select_curve_zone2
+      # Register 6, high byte (bits 8–15) — Zone 2 weather compensation curve, 1–9 (2-zone kit only)
+      optimistic: true
+      options:
+        - "Curve 1"
+        - "Curve 2"
+        - "Curve 3"
+        - "Curve 4"
+        - "Curve 5"
+        - "Curve 6"
+        - "Curve 7"
+        - "Curve 8"
+        - "Curve 9"
+      state: >-
+        {% set curve = (states('sensor.hp_curve_selection') | int(0) // 256) | bitwise_and(255) %}
+        {{ 'Curve ' ~ (curve if 1 <= curve <= 9 else 1) }}
+      select_option:
+        action: modbus.write_register
+        data:
+          hub: clivet_hp
+          unit: 1
+          address: 6
+          value: >-
+            {% set raw = states('sensor.hp_curve_selection') | int(0) %}
+            {% set zone1_lo = raw | bitwise_and(255) %}
+            {% set new_curve = option.split(' ')[1] | int(1) %}
+            {{ zone1_lo | bitwise_or(new_curve * 256) }}

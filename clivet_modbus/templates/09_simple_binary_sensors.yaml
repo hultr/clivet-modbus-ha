@@ -26,3 +26,15 @@
         {% endif %}
       device_class: running
       icon: "mdi:power-plug"
+
+    - name: "HP Holiday Away"
+      unique_id: bin_holiday_away
+      # Register 5, BIT5 — Holiday away mode active (read-only; set internally by controller)
+      state: "{{ (states('sensor.hp_function_register') | int(0)) | bitwise_and(32) != 0 }}"
+      icon: "mdi:home-export-outline"
+
+    - name: "HP Holiday Home"
+      unique_id: bin_holiday_home
+      # Register 5, BIT8 — Holiday home mode active (read-only; set internally by controller)
+      state: "{{ (states('sensor.hp_function_register') | int(0)) | bitwise_and(256) != 0 }}"
+      icon: "mdi:home-import-outline"

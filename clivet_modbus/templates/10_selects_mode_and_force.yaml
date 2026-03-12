@@ -1,0 +1,95 @@
+# Template selects for multiple-choice control registers
+#
+# Reg 1: Operating mode command (1=Auto, 2=Cooling, 3=Heating)
+# Reg 7: Force DHW hot water boost (0=Disable, 1=Force ON, 2=Force OFF)
+# Reg 8: Force TBH — tank backup heater (0=Disable, 1=Force ON, 2=Force OFF)
+# Reg 9: Force IBH — inline/internal backup heater (0=Disable, 1=Force ON, 2=Force OFF)
+#
+# NOTE: Reg 8 (Force TBH) and Reg 9 (Force IBH) cannot both be Force ON simultaneously.
+#       The firmware will reject or silently override the second one.
+#
+# optimistic: true — UI updates immediately without waiting for the next Modbus poll
+# (60-second poll interval would otherwise make controls feel unresponsive)
+
+- select:
+    - name: "HP Mode Command"
+      unique_id: select_mode_command
+      # Register 1 — Mode setpoint: 1=Auto, 2=Cooling, 3=Heating
+      optimistic: true
+      options:
+        - "Auto"
+        - "Cooling"
+        - "Heating"
+      state: >-
+        {{ {1: 'Auto', 2: 'Cooling', 3: 'Heating'}.get(
+             states('sensor.hp_mode_setting') | int(-1), 'Auto') }}
+      select_option:
+        action: modbus.write_register
+        data:
+          hub: clivet_hp
+          unit: 1
+          address: 1
+          value: "{{ {'Auto': 1, 'Cooling': 2, 'Heating': 3}.get(option, 1) }}"
+
+    - name: "HP Force DHW Heating"
+      unique_id: select_force_dhw
+      # Register 7 — Forced DHW hot water: 0=Disable, 1=Force ON, 2=Force OFF
+      # Force ON: runs DHW tank heating regardless of T5 setpoint
+      # Force OFF: prevents DHW heating (e.g. maintenance)
+      optimistic: true
+      options:
+        - "Disable"
+        - "Force ON"
+        - "Force OFF"
+      state: >-
+        {{ {0: 'Disable', 1: 'Force ON', 2: 'Force OFF'}.get(
+             states('sensor.hp_forced_hot_water') | int(-1), 'Disable') }}
+      select_option:
+        action: modbus.write_register
+        data:
+          hub: clivet_hp
+          unit: 1
+          address: 7
+          value: "{{ {'Disable': 0, 'Force ON': 1, 'Force OFF': 2}.get(option, 0) }}"
+
+    - name: "HP Force TBH"
+      unique_id: select_force_tbh
+      # Register 8 — Force Tank Backup Heater (electric element in DHW tank)
+      # 0=Disable, 1=Force ON, 2=Force OFF
+      # WARNING: Cannot be Force ON simultaneously with HP Force IBH (register 9)
+      optimistic: true
+      options:
+        - "Disable"
+        - "Force ON"
+        - "Force OFF"
+      state: >-
+        {{ {0: 'Disable', 1: 'Force ON', 2: 'Force OFF'}.get(
+             states('sensor.hp_force_tbh') | int(-1), 'Disable') }}
+      select_option:
+        action: modbus.write_register
+        data:
+          hub: clivet_hp
+          unit: 1
+          address: 8
+          value: "{{ {'Disable': 0, 'Force ON': 1, 'Force OFF': 2}.get(option, 0) }}"
+
+    - name: "HP Force IBH"
+      unique_id: select_force_ibh
+      # Register 9 — Force Inline/Internal Backup Heater (system electric resistance heater)
+      # 0=Disable, 1=Force ON, 2=Force OFF
+      # WARNING: Cannot be Force ON simultaneously with HP Force TBH (register 8)
+      optimistic: true
+      options:
+        - "Disable"
+        - "Force ON"
+        - "Force OFF"
+      state: >-
+        {{ {0: 'Disable', 1: 'Force ON', 2: 'Force OFF'}.get(
+             states('sensor.hp_force_ibh') | int(-1), 'Disable') }}
+      select_option:
+        action: modbus.write_register
+        data:
+          hub: clivet_hp
+          unit: 1
+          address: 9
+          value: "{{ {'Disable': 0, 'Force ON': 1, 'Force OFF': 2}.get(option, 0) }}"
