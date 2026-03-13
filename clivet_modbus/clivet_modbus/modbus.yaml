@@ -14,7 +14,7 @@
 # To include technician registers again, rename it back to:
 #   clivet_modbus/sensors/08_tech.yaml
 
-- name: clivet_hp
+- name: Clivet Heatpump
   unique_id: clivet_heatpump
   type: tcp
   host: !secret clivet_host  # default: 192.168.20.113

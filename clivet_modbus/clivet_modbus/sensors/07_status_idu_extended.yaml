@@ -352,18 +352,18 @@
 #   unique_id: hp_odu_current_idu
 #   # Register 1037 — ODU supply current A as seen from IDU telemetry
 
-# - name: hp_odu_voltage_idu
-#   address: 1038
-#   slave: 1
-#   input_type: holding
-#   data_type: uint16
-#   scale: 1
-#   precision: 0
-#   unit_of_measurement: "V"
-#   device_class: voltage
-#   scan_interval: *scan_interval
-#   unique_id: hp_odu_voltage_idu
-#   # Register 1038 — ODU supply voltage V as seen from IDU telemetry
+- name: hp_odu_voltage_idu
+  address: 1038
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "V"
+  device_class: voltage
+  scan_interval: *scan_interval
+  unique_id: hp_odu_voltage_idu
+  # Register 1038 — ODU supply voltage V as seen from IDU telemetry
 
 # - name: hp_odu_frequency_limit_solution
 #   address: 1039
