@@ -41,31 +41,31 @@
   unique_id: hp_target_frequency
   # Register 132 — Target compressor frequency Hz (compare with register 100 for actual frequency)
 
-# - name: hp_dc_bus_current
-#   address: 133
-#   slave: 1
-#   input_type: holding
-#   data_type: uint16
-#   scale: 1
-#   precision: 0
-#   unit_of_measurement: "A"
-#   device_class: current
-#   scan_interval: *scan_interval
-#   unique_id: hp_dc_bus_current
-#   # Register 133 — DC bus current A
+- name: hp_dc_bus_current
+  address: 133
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 1
+  precision: 0
+  unit_of_measurement: "A"
+  device_class: current
+  scan_interval: *scan_interval
+  unique_id: hp_dc_bus_current
+  # Register 133 — DC bus current A
 
-# - name: hp_dc_bus_voltage
-#   address: 134
-#   slave: 1
-#   input_type: holding
-#   data_type: uint16
-#   scale: 10
-#   precision: 1
-#   unit_of_measurement: "V"
-#   device_class: voltage
-#   scan_interval: *scan_interval
-#   unique_id: hp_dc_bus_voltage
-#   # Register 134 — DC bus voltage V; raw = actual / 10, so scale = 10 to recover actual value
+- name: hp_dc_bus_voltage
+  address: 134
+  slave: 1
+  input_type: holding
+  data_type: uint16
+  scale: 10
+  precision: 1
+  unit_of_measurement: "V"
+  device_class: voltage
+  scan_interval: *scan_interval
+  unique_id: hp_dc_bus_voltage
+  # Register 134 — DC bus voltage V; raw = actual / 10, so scale = 10 to recover actual value
 
 - name: hp_tf_igbt_temperature
   address: 135
