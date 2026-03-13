@@ -1,7 +1,13 @@
 # Combined / derived template sensors
 # These sensors combine multiple raw Modbus registers or decode enumerated values.
 
-- sensor:
+- device:
+    identifiers:
+      - clivet_heatpump
+    name: "Heatpump"
+    manufacturer: "Clivet"
+    model: "Sphera EVO 2.0"
+  sensor:
     - name: "HP Total Electrical Consumption"
       unique_id: tpl_total_electrical_consumption
       # Registers 143 (high) + 144 (low) — 32-bit electrical energy counter
@@ -75,11 +81,15 @@
     - name: "HP ODU Power Consumption"
       unique_id: tpl_odu_power_consumption
       # Outdoor unit power: AC current × AC voltage / 1000 for kW
-      # Register 118 (current) × Register 119 (voltage)
+      # Register 118 (current) × Register 119 (voltage); falls back to IDU-reported voltage
+      # (register 1038) when the ODU voltage register is unsupported (returns 0 on some models)
       state: >-
-        {% set current = states('sensor.hp_odu_current') | float(0) %}
-        {% set voltage = states('sensor.hp_odu_voltage') | float(0) %}
-        {% if current is number and voltage is number %}
+        {% set current = states('sensor.hp_odu_current') | float(none) %}
+        {% set voltage = states('sensor.hp_odu_voltage') | float(none) %}
+        {% if voltage is none or voltage == 0 %}
+          {% set voltage = states('sensor.hp_odu_voltage_idu') | float(none) %}
+        {% endif %}
+        {% if current is not none and voltage is not none and voltage > 0 %}
           {{ (current * voltage / 1000) | round(2) }}
         {% else %}
           unavailable

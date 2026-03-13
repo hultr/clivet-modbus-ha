@@ -1,7 +1,13 @@
 # Binary sensors extracted from register 129 — ODU load output bitmask
 # Source sensor: sensor.load_output_bits
 
-- binary_sensor:
+- device:
+    identifiers:
+      - clivet_heatpump
+    name: "Heatpump"
+    manufacturer: "Clivet"
+    model: "Sphera EVO 2.0"
+  binary_sensor:
     - name: "HP IBH1 Running"
       unique_id: bit_reg129_ibh1
       # Register 129, BIT0 — Inline backup heater 1 (IBH1) is energised

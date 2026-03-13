@@ -14,7 +14,13 @@
 #
 # optimistic: true — UI updates immediately without waiting for next Modbus poll
 
-- select:
+- device:
+    identifiers:
+      - clivet_heatpump
+    name: "Heatpump"
+    manufacturer: "Clivet"
+    model: "Sphera EVO 2.0"
+  select:
     - name: "HP Zone 1 Curve"
       unique_id: select_curve_zone1
       # Register 6, low byte (bits 0–7) — Zone 1 weather compensation curve, 1–9

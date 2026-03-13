@@ -7,7 +7,13 @@
 # BIT2 = T5S — DHW (domestic hot water) heating
 # BIT3 = T2S — Zone 2 water flow temperature control
 
-- switch:
+- device:
+    identifiers:
+      - clivet_heatpump
+    name: "Heatpump"
+    manufacturer: "Clivet"
+    model: "Sphera EVO 2.0"
+  switch:
     - name: "HP Room Thermostat Enable (TS)"
       unique_id: switch_onoff_ts
       # Register 0, BIT0 — Room thermostat (TS) space heating/cooling ON/OFF

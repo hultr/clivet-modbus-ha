@@ -15,6 +15,7 @@
 #   clivet_modbus/sensors/08_tech.yaml
 
 - name: clivet_hp
+  unique_id: clivet_heatpump
   type: tcp
   host: !secret clivet_host  # default: 192.168.20.113
   port: 502
