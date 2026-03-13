@@ -1,13 +1,7 @@
 # Binary sensors extracted from register 1007 — IDU status bitmask 1
 # Source sensor: sensor.idu_status_1
 
-- device:
-    identifiers:
-      - clivet_heatpump
-    name: "Heatpump"
-    manufacturer: "Clivet"
-    model: "Sphera EVO 2.0"
-  binary_sensor:
+- binary_sensor:
     - name: "HP IDU Defrost Active"
       unique_id: bit_reg1007_defrost
       # Register 1007, BIT0 — IDU-reported defrost cycle is active

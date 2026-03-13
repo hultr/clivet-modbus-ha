@@ -1,13 +1,7 @@
 # Binary sensors extracted from register 128 — ODU status bitmask 1
 # Source sensor: sensor.status_bits_1
 
-- device:
-    identifiers:
-      - clivet_heatpump
-    name: "Heatpump"
-    manufacturer: "Clivet"
-    model: "Sphera EVO 2.0"
-  binary_sensor:
+- binary_sensor:
     - name: "HP Recirculation Pump Running"
       unique_id: bit_reg128_recirculation_pump
       # Register 128, BIT0 — Water circulation recirculation pump is running

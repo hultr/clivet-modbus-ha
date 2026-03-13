@@ -14,27 +14,12 @@
 #
 # optimistic: true — UI updates immediately without waiting for next Modbus poll
 
-- device:
-    identifiers:
-      - clivet_heatpump
-    name: "Heatpump"
-    manufacturer: "Clivet"
-    model: "Sphera EVO 2.0"
-  select:
+- select:
     - name: "HP Zone 1 Curve"
       unique_id: select_curve_zone1
       # Register 6, low byte (bits 0–7) — Zone 1 weather compensation curve, 1–9
       optimistic: true
-      options:
-        - "Curve 1"
-        - "Curve 2"
-        - "Curve 3"
-        - "Curve 4"
-        - "Curve 5"
-        - "Curve 6"
-        - "Curve 7"
-        - "Curve 8"
-        - "Curve 9"
+      options: "{{ ['Curve 1','Curve 2','Curve 3','Curve 4','Curve 5','Curve 6','Curve 7','Curve 8','Curve 9'] }}"
       state: >-
         {% set curve = states('sensor.hp_curve_selection') | int(0) | bitwise_and(255) %}
         {{ 'Curve ' ~ (curve if 1 <= curve <= 9 else 1) }}
@@ -54,16 +39,7 @@
       unique_id: select_curve_zone2
       # Register 6, high byte (bits 8–15) — Zone 2 weather compensation curve, 1–9 (2-zone kit only)
       optimistic: true
-      options:
-        - "Curve 1"
-        - "Curve 2"
-        - "Curve 3"
-        - "Curve 4"
-        - "Curve 5"
-        - "Curve 6"
-        - "Curve 7"
-        - "Curve 8"
-        - "Curve 9"
+      options: "{{ ['Curve 1','Curve 2','Curve 3','Curve 4','Curve 5','Curve 6','Curve 7','Curve 8','Curve 9'] }}"
       state: >-
         {% set curve = (states('sensor.hp_curve_selection') | int(0) // 256) | bitwise_and(255) %}
         {{ 'Curve ' ~ (curve if 1 <= curve <= 9 else 1) }}

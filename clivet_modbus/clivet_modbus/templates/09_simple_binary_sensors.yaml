@@ -1,12 +1,6 @@
 # Simple binary sensors derived from basic threshold checks
 
-- device:
-    identifiers:
-      - clivet_heatpump
-    name: "Heatpump"
-    manufacturer: "Clivet"
-    model: "Sphera EVO 2.0"
-  binary_sensor:
+- binary_sensor:
     - name: "HP Fan Running"
       unique_id: bin_fan_running
       # Fan is running when ODU fan speed > 0 RPM

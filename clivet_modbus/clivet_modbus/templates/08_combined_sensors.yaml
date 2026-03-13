@@ -1,13 +1,7 @@
 # Combined / derived template sensors
 # These sensors combine multiple raw Modbus registers or decode enumerated values.
 
-- device:
-    identifiers:
-      - clivet_heatpump
-    name: "Heatpump"
-    manufacturer: "Clivet"
-    model: "Sphera EVO 2.0"
-  sensor:
+- sensor:
     - name: "HP Total Electrical Consumption"
       unique_id: tpl_total_electrical_consumption
       # Registers 143 (high) + 144 (low) — 32-bit electrical energy counter

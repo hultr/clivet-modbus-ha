@@ -11,21 +11,12 @@
 # optimistic: true — UI updates immediately without waiting for the next Modbus poll
 # (60-second poll interval would otherwise make controls feel unresponsive)
 
-- device:
-    identifiers:
-      - clivet_heatpump
-    name: "Heatpump"
-    manufacturer: "Clivet"
-    model: "Sphera EVO 2.0"
-  select:
+- select:
     - name: "HP Mode Command"
       unique_id: select_mode_command
       # Register 1 — Mode setpoint: 1=Auto, 2=Cooling, 3=Heating
       optimistic: true
-      options:
-        - "Auto"
-        - "Cooling"
-        - "Heating"
+      options: "{{ ['Auto', 'Cooling', 'Heating'] }}"
       state: >-
         {{ {1: 'Auto', 2: 'Cooling', 3: 'Heating'}.get(
              states('sensor.hp_mode_setting') | int(-1), 'Auto') }}
@@ -43,10 +34,7 @@
       # Force ON: runs DHW tank heating regardless of T5 setpoint
       # Force OFF: prevents DHW heating (e.g. maintenance)
       optimistic: true
-      options:
-        - "Disable"
-        - "Force ON"
-        - "Force OFF"
+      options: "{{ ['Disable', 'Force ON', 'Force OFF'] }}"
       state: >-
         {{ {0: 'Disable', 1: 'Force ON', 2: 'Force OFF'}.get(
              states('sensor.hp_forced_hot_water') | int(-1), 'Disable') }}
@@ -64,10 +52,7 @@
       # 0=Disable, 1=Force ON, 2=Force OFF
       # WARNING: Cannot be Force ON simultaneously with HP Force IBH (register 9)
       optimistic: true
-      options:
-        - "Disable"
-        - "Force ON"
-        - "Force OFF"
+      options: "{{ ['Disable', 'Force ON', 'Force OFF'] }}"
       state: >-
         {{ {0: 'Disable', 1: 'Force ON', 2: 'Force OFF'}.get(
              states('sensor.hp_force_tbh') | int(-1), 'Disable') }}
@@ -85,10 +70,7 @@
       # 0=Disable, 1=Force ON, 2=Force OFF
       # WARNING: Cannot be Force ON simultaneously with HP Force TBH (register 8)
       optimistic: true
-      options:
-        - "Disable"
-        - "Force ON"
-        - "Force OFF"
+      options: "{{ ['Disable', 'Force ON', 'Force OFF'] }}"
       state: >-
         {{ {0: 'Disable', 1: 'Force ON', 2: 'Force OFF'}.get(
              states('sensor.hp_force_ibh') | int(-1), 'Disable') }}

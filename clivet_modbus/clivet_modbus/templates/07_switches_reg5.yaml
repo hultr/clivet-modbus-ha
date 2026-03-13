@@ -13,13 +13,7 @@
 #   BIT12 = Zone 1 weather curve enable (mask=4096, clear=61439)
 #   BIT13 = Zone 2 weather curve enable (mask=8192, clear=57343)
 
-- device:
-    identifiers:
-      - clivet_heatpump
-    name: "Heatpump"
-    manufacturer: "Clivet"
-    model: "Sphera EVO 2.0"
-  switch:
+- switch:
     - name: "HP Sterilization Enable"
       unique_id: switch_func_sterilization
       # Register 5, BIT4 — DHW sterilization (Legionella protection) cycle enable
