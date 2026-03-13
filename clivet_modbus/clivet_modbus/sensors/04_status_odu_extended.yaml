@@ -6,27 +6,27 @@
 # in this file. (YAML anchor; referenced as *scan_interval throughout)
 # ─────────────────────────────────────────────────────────────────────────────
 
-- name: hp_idu_software_version
-  address: 130
-  slave: 1
-  input_type: holding
-  data_type: uint16
-  scale: 1
-  precision: 0
-  scan_interval: &scan_interval 19   # ← change this value to repoll all sensors in this file
-  unique_id: hp_idu_software_version
-  # Register 130 — IDU (indoor unit) software version 0–99
+# - name: hp_idu_software_version
+#   address: 130
+#   slave: 1
+#   input_type: holding
+#   data_type: uint16
+#   scale: 1
+#   precision: 0
+#   scan_interval: &scan_interval 19   # ← change this value to repoll all sensors in this file
+#   unique_id: hp_idu_software_version
+#   # Register 130 — IDU (indoor unit) software version 0–99
 
-- name: hp_ui_software_version
-  address: 131
-  slave: 1
-  input_type: holding
-  data_type: uint16
-  scale: 1
-  precision: 0
-  scan_interval: *scan_interval
-  unique_id: hp_ui_software_version
-  # Register 131 — UI (user interface) software version 0–99
+# - name: hp_ui_software_version
+#   address: 131
+#   slave: 1
+#   input_type: holding
+#   data_type: uint16
+#   scale: 1
+#   precision: 0
+#   scan_interval: *scan_interval
+#   unique_id: hp_ui_software_version
+#   # Register 131 — UI (user interface) software version 0–99
 
 - name: hp_target_frequency
   address: 132
@@ -37,35 +37,35 @@
   precision: 0
   unit_of_measurement: "Hz"
   device_class: frequency
-  scan_interval: *scan_interval
+  scan_interval: &scan_interval 19   # ← change this value to repoll all sensors in this file
   unique_id: hp_target_frequency
   # Register 132 — Target compressor frequency Hz (compare with register 100 for actual frequency)
 
-- name: hp_dc_bus_current
-  address: 133
-  slave: 1
-  input_type: holding
-  data_type: uint16
-  scale: 1
-  precision: 0
-  unit_of_measurement: "A"
-  device_class: current
-  scan_interval: *scan_interval
-  unique_id: hp_dc_bus_current
-  # Register 133 — DC bus current A
+# - name: hp_dc_bus_current
+#   address: 133
+#   slave: 1
+#   input_type: holding
+#   data_type: uint16
+#   scale: 1
+#   precision: 0
+#   unit_of_measurement: "A"
+#   device_class: current
+#   scan_interval: *scan_interval
+#   unique_id: hp_dc_bus_current
+#   # Register 133 — DC bus current A
 
-- name: hp_dc_bus_voltage
-  address: 134
-  slave: 1
-  input_type: holding
-  data_type: uint16
-  scale: 10
-  precision: 1
-  unit_of_measurement: "V"
-  device_class: voltage
-  scan_interval: *scan_interval
-  unique_id: hp_dc_bus_voltage
-  # Register 134 — DC bus voltage V; raw = actual / 10, so scale = 10 to recover actual value
+# - name: hp_dc_bus_voltage
+#   address: 134
+#   slave: 1
+#   input_type: holding
+#   data_type: uint16
+#   scale: 10
+#   precision: 1
+#   unit_of_measurement: "V"
+#   device_class: voltage
+#   scan_interval: *scan_interval
+#   unique_id: hp_dc_bus_voltage
+#   # Register 134 — DC bus voltage V; raw = actual / 10, so scale = 10 to recover actual value
 
 - name: hp_tf_igbt_temperature
   address: 135
@@ -144,30 +144,30 @@
   # Register 140 — IDU operating capacity kW; raw = actual × 100, scale = 0.01
   # GUESSWORK: scaling inferred from manual description; verify against actual unit readings
 
-- name: hp_t_solar
-  address: 141
-  slave: 1
-  input_type: holding
-  data_type: int16
-  scale: 1
-  precision: 0
-  unit_of_measurement: "°C"
-  device_class: temperature
-  scan_interval: *scan_interval
-  unique_id: hp_t_solar
-  # Register 141 — T solar panel temperature °C (solar thermal kit only; may read 0 if not installed)
+# - name: hp_t_solar
+#   address: 141
+#   slave: 1
+#   input_type: holding
+#   data_type: int16
+#   scale: 1
+#   precision: 0
+#   unit_of_measurement: "°C"
+#   device_class: temperature
+#   scan_interval: *scan_interval
+#   unique_id: hp_t_solar
+#   # Register 141 — T solar panel temperature °C (solar thermal kit only; may read 0 if not installed)
 
-- name: hp_cascade_units_bitmask
-  address: 142
-  slave: 1
-  input_type: holding
-  data_type: uint16
-  scale: 1
-  precision: 0
-  scan_interval: *scan_interval
-  unique_id: hp_cascade_units_bitmask
-  # Register 142 — Cascade units online bitmask: BIT1–BIT15 = units 1–15 online/offline
-  # (cascade / multi-unit installation only)
+# - name: hp_cascade_units_bitmask
+#   address: 142
+#   slave: 1
+#   input_type: holding
+#   data_type: uint16
+#   scale: 1
+#   precision: 0
+#   scan_interval: *scan_interval
+#   unique_id: hp_cascade_units_bitmask
+#   # Register 142 — Cascade units online bitmask: BIT1–BIT15 = units 1–15 online/offline
+#   # (cascade / multi-unit installation only)
 
 - name: hp_electrical_high_bits
   address: 143

@@ -56,37 +56,37 @@
   unique_id: hp_two_water_outlet
   # Register 1003 — Two water outlet temperature °C (IDU side)
 
-- name: hp_tsolar_idu
-  address: 1004
-  slave: 1
-  input_type: holding
-  data_type: int16
-  scale: 1
-  precision: 0
-  unit_of_measurement: "°C"
-  device_class: temperature
-  scan_interval: *scan_interval
-  unique_id: hp_tsolar_idu
-  # Register 1004 — Tsolar solar panel temperature °C as seen by IDU (solar kit only)
+# - name: hp_tsolar_idu
+#   address: 1004
+#   slave: 1
+#   input_type: holding
+#   data_type: int16
+#   scale: 1
+#   precision: 0
+#   unit_of_measurement: "°C"
+#   device_class: temperature
+#   scan_interval: *scan_interval
+#   unique_id: hp_tsolar_idu
+#   # Register 1004 — Tsolar solar panel temperature °C as seen by IDU (solar kit only)
 
-- name: hp_slave_unit_error_code
-  address: 1005
-  slave: 1
-  input_type: holding
-  data_type: uint16
-  scale: 1
-  precision: 0
-  scan_interval: *scan_interval
-  unique_id: hp_slave_unit_error_code
-  # Register 1005 — Slave unit error code (cascade / multi-unit installations)
+# - name: hp_slave_unit_error_code
+#   address: 1005
+#   slave: 1
+#   input_type: holding
+#   data_type: uint16
+#   scale: 1
+#   precision: 0
+#   scan_interval: *scan_interval
+#   unique_id: hp_slave_unit_error_code
+#   # Register 1005 — Slave unit error code (cascade / multi-unit installations)
 
-- name: hp_p6_error
-  address: 1006
-  slave: 1
-  input_type: holding
-  data_type: uint16
-  scale: 1
-  precision: 0
-  scan_interval: *scan_interval
-  unique_id: hp_p6_error
-  # Register 1006 — P6 error code (reserved; may always read 0)
+# - name: hp_p6_error
+#   address: 1006
+#   slave: 1
+#   input_type: holding
+#   data_type: uint16
+#   scale: 1
+#   precision: 0
+#   scan_interval: *scan_interval
+#   unique_id: hp_p6_error
+#   # Register 1006 — P6 error code (reserved; may always read 0)

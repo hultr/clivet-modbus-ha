@@ -186,18 +186,18 @@
   unique_id: hp_t2b_refrigerant_gas
   # Register 113 — T2B refrigerant gas temperature °C
 
-- name: hp_indoor_air_temperature
-  address: 114
-  slave: 1
-  input_type: holding
-  data_type: int16
-  scale: 1
-  precision: 0
-  unit_of_measurement: "°C"
-  device_class: temperature
-  scan_interval: *scan_interval
-  unique_id: hp_indoor_air_temperature
-  # Register 114 — Ta indoor/room air temperature °C
+# - name: hp_indoor_air_temperature
+#   address: 114
+#   slave: 1
+#   input_type: holding
+#   data_type: int16
+#   scale: 1
+#   precision: 0
+#   unit_of_measurement: "°C"
+#   device_class: temperature
+#   scan_interval: *scan_interval
+#   unique_id: hp_indoor_air_temperature
+#   # Register 114 — Ta indoor/room air temperature °C
 
 - name: hp_dhw_tank_temperature
   address: 115
@@ -264,31 +264,31 @@
   unique_id: hp_odu_voltage
   # Register 119 — ODU supply voltage V (may not report on all models)
 
-- name: hp_buffer_tank_temperature
-  address: 120
-  slave: 1
-  input_type: holding
-  data_type: int16
-  scale: 1
-  precision: 0
-  unit_of_measurement: "°C"
-  device_class: temperature
-  scan_interval: *scan_interval
-  unique_id: hp_buffer_tank_temperature
-  # Register 120 — Tbt1 buffer tank temperature °C
+# - name: hp_buffer_tank_temperature
+#   address: 120
+#   slave: 1
+#   input_type: holding
+#   data_type: int16
+#   scale: 1
+#   precision: 0
+#   unit_of_measurement: "°C"
+#   device_class: temperature
+#   scan_interval: *scan_interval
+#   unique_id: hp_buffer_tank_temperature
+#   # Register 120 — Tbt1 buffer tank temperature °C
 
-- name: hp_secondary_tank_temperature
-  address: 121
-  slave: 1
-  input_type: holding
-  data_type: int16
-  scale: 1
-  precision: 0
-  unit_of_measurement: "°C"
-  device_class: temperature
-  scan_interval: *scan_interval
-  unique_id: hp_secondary_tank_temperature
-  # Register 121 — Tbt2 secondary buffer tank temperature °C
+# - name: hp_secondary_tank_temperature
+#   address: 121
+#   slave: 1
+#   input_type: holding
+#   data_type: int16
+#   scale: 1
+#   precision: 0
+#   unit_of_measurement: "°C"
+#   device_class: temperature
+#   scan_interval: *scan_interval
+#   unique_id: hp_secondary_tank_temperature
+#   # Register 121 — Tbt2 secondary buffer tank temperature °C
 
 - name: hp_compressor_run_hours
   address: 122
@@ -303,16 +303,16 @@
   unique_id: hp_compressor_run_hours
   # Register 122 — Compressor cumulative running time hours
 
-- name: hp_unit_type
-  address: 123
-  slave: 1
-  input_type: holding
-  data_type: uint16
-  scale: 1
-  precision: 0
-  scan_interval: *scan_interval
-  unique_id: hp_unit_type
-  # Register 123 — Unit type / capacity identifier code
+# - name: hp_unit_type
+#   address: 123
+#   slave: 1
+#   input_type: holding
+#   data_type: uint16
+#   scale: 1
+#   precision: 0
+#   scan_interval: *scan_interval
+#   unique_id: hp_unit_type
+#   # Register 123 — Unit type / capacity identifier code
 
 - name: hp_current_fault_code
   address: 124
