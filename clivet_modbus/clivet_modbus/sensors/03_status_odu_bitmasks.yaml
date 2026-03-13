@@ -15,7 +15,7 @@
   data_type: uint16
   scale: 1
   precision: 0
-  scan_interval: &scan_interval 15   # ← change this value to repoll all sensors
+  scan_interval: &scan_interval 17   # ← change this value to repoll all sensors in this file
   unique_id: hp_status_bits_1
   # Register 128 — ODU status bitmask 1
   # BIT0=recirculation pump, BIT1=defrost, BIT2=anti-freeze, BIT3=oil return,

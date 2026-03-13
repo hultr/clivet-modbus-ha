@@ -15,7 +15,7 @@
   data_type: uint16
   scale: 1
   precision: 0
-  scan_interval: &scan_interval 15   # ← change this value to repoll all sensors
+  scan_interval: &scan_interval 29   # ← change this value to repoll all sensors in this file
   unique_id: hp_idu_status_1
   # Register 1007 — IDU status bitmask 1
   # BIT0=Defrost, BIT1=Anti-freeze, BIT2=Oil return, BIT3–7=Reserved

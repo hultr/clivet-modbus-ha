@@ -13,7 +13,7 @@
   data_type: uint16
   scale: 1
   precision: 0
-  scan_interval: &scan_interval 15   # ← change this value to repoll all sensors
+  scan_interval: &scan_interval 19   # ← change this value to repoll all sensors in this file
   unique_id: hp_idu_software_version
   # Register 130 — IDU (indoor unit) software version 0–99
 

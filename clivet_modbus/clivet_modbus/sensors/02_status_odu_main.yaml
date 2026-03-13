@@ -15,7 +15,7 @@
   precision: 0
   unit_of_measurement: "Hz"
   device_class: frequency
-  scan_interval: &scan_interval 15   # ← change this value to repoll all sensors
+  scan_interval: &scan_interval 15   # ← change this value to repoll all sensors in this file
   unique_id: hp_compressor_operating_frequency
   # Register 100 — Compressor operating frequency Hz; 0 = compressor off
 

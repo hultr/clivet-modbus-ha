@@ -13,7 +13,7 @@
   data_type: uint16
   scale: 1
   precision: 0
-  scan_interval: &scan_interval 15   # ← change this value to repoll all sensors
+  scan_interval: &scan_interval 23   # ← change this value to repoll all sensors in this file
   unique_id: hp_idu_operation_mode
   # Register 1000 — IDU operating mode: 0=OFF, 2=COOL, 3=HEAT
 
